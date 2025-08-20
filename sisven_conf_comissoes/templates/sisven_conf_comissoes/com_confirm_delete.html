@@ -1,0 +1,26 @@
+{% extends "global/base.html" %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h3 class="card-title">Confirmar Exclusão</h3>
+                    <p>Você tem certeza que deseja apagar a configuração para <strong>"{{ config }}"</strong>?</p>
+                    <p class="text-danger">Esta ação não pode ser desfeita.</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary me-2">Cancelar</a>
+                            <button type="submit" class="btn btn-danger">Sim, apagar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

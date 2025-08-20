@@ -1,0 +1,51 @@
+{% load static %}
+{% if user.is_authenticated %}
+<div class="d-flex flex-column flex-shrink-0 p-2 bg-light h-100">
+    
+    <ul class="nav nav-pills flex-column"> 
+
+        <!-- Início do Loop Dinâmico -->
+        {% for item in menu_principal %}
+        <li>
+            <!-- Item Principal do Menu (Pai) -->
+            <a href="#{{ item.id }}" data-bs-toggle="collapse" class="nav-link link-dark">
+                <i class="fas {{ item.icon }} me-2"></i> <span>{{ item.label }}</span>
+            </a>
+
+            <!-- Submenu (Filhos) -->
+            <!-- Verificamos se a lista 'sub_itens' existe e não está vazia -->
+            {% if item.sub_itens %}
+            <ul class="collapse list-unstyled ps-4" id="{{ item.id }}">
+                
+                <!-- Loop para renderizar cada sub-item -->
+                {% for sub_item in item.sub_itens %}
+                <li>
+                    <a href="{% url sub_item.url_name %}" class="nav-link link-dark">
+                        <span>{{ sub_item.label }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+        <!-- Fim do Loop Dinâmico -->
+
+    </ul>
+
+    <!-- Esta parte do menu do usuário permanece igual -->
+    <div class="mt-auto">
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle me-2 fs-4"></i>
+                <strong><span>{{ request.user.username|default:'Usuário' }}</span></strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="{% url 'core:logout' %}">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,121 @@
+{% extends "global/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center my-2">
+        <h2>{{ titulo }}</h2>
+        <a href="{% url 'sisven_users:usuario_list' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i> Voltar para a Lista
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <h5 class="mb-3 border-bottom pb-2">Dados de Identificação</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3">{{ form.nome|as_crispy_field }}</div>
+                    <div class="col-md-3 mb-3">{{ form.login|as_crispy_field }}</div>
+                    <div class="col-md-3 mb-3">{{ form.senha|as_crispy_field }}</div>
+                </div>
+
+                <h5 class="mb-3 border-bottom pb-2">Contato e Status</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3">{{ form.email_pessoal|as_crispy_field }}</div>
+                    <div class="col-md-3 mb-3">{{ form.celular_sms|as_crispy_field }}</div>
+                    <div class="col-md-3 mb-3">{{ form.status|as_crispy_field }}</div>
+                </div>
+
+                <h5 class="mb-3 border-bottom pb-2">Permissões</h5>
+                <div class="row">
+                    <!-- Coluna Esquerda de Permissões -->
+                    <div class="col-md-6">
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.liberar_pedidos.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.liberar_pedidos.label }}</label></div><div class="col-4">{{ form.liberar_pedidos }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.exportar_pedidos_liberados.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.exportar_pedidos_liberados.label }}</label></div><div class="col-4">{{ form.exportar_pedidos_liberados }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.desbloquear_pedidos.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.desbloquear_pedidos.label }}</label></div><div class="col-4">{{ form.desbloquear_pedidos }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_pedidos_liberados.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_pedidos_liberados.label }}</label></div><div class="col-4">{{ form.alterar_pedidos_liberados }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_previsao_entrega.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_previsao_entrega.label }}</label></div><div class="col-4">{{ form.alterar_previsao_entrega }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_info_financeira_pedido.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_info_financeira_pedido.label }}</label></div><div class="col-4">{{ form.alterar_info_financeira_pedido }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.importar_pedidos_franquiados.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.importar_pedidos_franquiados.label }}</label></div><div class="col-4">{{ form.importar_pedidos_franquiados }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.digitar_orcamento.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.digitar_orcamento.label }}</label></div><div class="col-4">{{ form.digitar_orcamento }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_pedidos.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_pedidos.label }}</label></div><div class="col-4">{{ form.relatorio_pedidos }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_pedidos_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_pedidos_cliente.label }}</label></div><div class="col-4">{{ form.relatorio_pedidos_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_pedidos_representante.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_pedidos_representante.label }}</label></div><div class="col-4">{{ form.relatorio_pedidos_representante }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_titulos_aberto.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_titulos_aberto.label }}</label></div><div class="col-4">{{ form.relatorio_titulos_aberto }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_titulos.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_titulos.label }}</label></div><div class="col-4">{{ form.relatorio_titulos }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_posicao_pedidos.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_posicao_pedidos.label }}</label></div><div class="col-4">{{ form.relatorio_posicao_pedidos }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_pedidos_emitidos_ibg.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_pedidos_emitidos_ibg.label }}</label></div><div class="col-4">{{ form.relatorio_pedidos_emitidos_ibg }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_drp.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_drp.label }}</label></div><div class="col-4">{{ form.relatorio_drp }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.relatorio_pedidos_on_time.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.relatorio_pedidos_on_time.label }}</label></div><div class="col-4">{{ form.relatorio_pedidos_on_time }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.espelho_nota_fiscal.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.espelho_nota_fiscal.label }}</label></div><div class="col-4">{{ form.espelho_nota_fiscal }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.ver_margem_lucro.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.ver_margem_lucro.label }}</label></div><div class="col-4">{{ form.ver_margem_lucro }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_preco_custo.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_preco_custo.label }}</label></div><div class="col-4">{{ form.consultar_preco_custo }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_preco_venda.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_preco_venda.label }}</label></div><div class="col-4">{{ form.consultar_preco_venda }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_dados_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_dados_cliente.label }}</label></div><div class="col-4">{{ form.consultar_dados_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_ultima_compra_artigo.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_ultima_compra_artigo.label }}</label></div><div class="col-4">{{ form.consultar_ultima_compra_artigo }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_serasa.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_serasa.label }}</label></div><div class="col-4">{{ form.consultar_serasa }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_limite_credito.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_limite_credito.label }}</label></div><div class="col-4">{{ form.consultar_limite_credito }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.historico_vendas_artigo.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.historico_vendas_artigo.label }}</label></div><div class="col-4">{{ form.historico_vendas_artigo }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_senha.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_senha.label }}</label></div><div class="col-4">{{ form.alterar_senha }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.mudar_cliente_provisorio.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.mudar_cliente_provisorio.label }}</label></div><div class="col-4">{{ form.mudar_cliente_provisorio }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.configurar_grade_custo.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.configurar_grade_custo.label }}</label></div><div class="col-4">{{ form.configurar_grade_custo }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_grade_custo.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_grade_custo.label }}</label></div><div class="col-4">{{ form.consultar_grade_custo }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.adicionar_parametros_botao.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.adicionar_parametros_botao.label }}</label></div><div class="col-4">{{ form.adicionar_parametros_botao }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_parametros_botao.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_parametros_botao.label }}</label></div><div class="col-4">{{ form.alterar_parametros_botao }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.cadastrar_cod_gravacao.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.cadastrar_cod_gravacao.label }}</label></div><div class="col-4">{{ form.cadastrar_cod_gravacao }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.cadastrar_lista_preco.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.cadastrar_lista_preco.label }}</label></div><div class="col-4">{{ form.cadastrar_lista_preco }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.gerar_lista_preco.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.gerar_lista_preco.label }}</label></div><div class="col-4">{{ form.gerar_lista_preco }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.imprimir_lista_preco.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.imprimir_lista_preco.label }}</label></div><div class="col-4">{{ form.imprimir_lista_preco }}</div></div>
+                    </div>
+                    <!-- Coluna Direita de Permissões -->
+                    <div class="col-md-6">
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_cod_personalizado.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_cod_personalizado.label }}</label></div><div class="col-4">{{ form.consultar_cod_personalizado }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.politica_vendas.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.politica_vendas.label }}</label></div><div class="col-4">{{ form.politica_vendas }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.aceitar_arroba_50.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.aceitar_arroba_50.label }}</label></div><div class="col-4">{{ form.aceitar_arroba_50 }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.cadastrar_obs_fixa_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.cadastrar_obs_fixa_cliente.label }}</label></div><div class="col-4">{{ form.cadastrar_obs_fixa_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.cadastrar_madeiras.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.cadastrar_madeiras.label }}</label></div><div class="col-4">{{ form.cadastrar_madeiras }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.grade_custo_botao_madeira.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.grade_custo_botao_madeira.label }}</label></div><div class="col-4">{{ form.grade_custo_botao_madeira }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.rendimento_pastilha_madeira.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.rendimento_pastilha_madeira.label }}</label></div><div class="col-4">{{ form.rendimento_pastilha_madeira }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.parametro_artigo_madeira.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.parametro_artigo_madeira.label }}</label></div><div class="col-4">{{ form.parametro_artigo_madeira }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_dados_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_dados_cliente.label }}</label></div><div class="col-4">{{ form.alterar_dados_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.limite_credito.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.limite_credito.label }}</label></div><div class="col-4">{{ form.limite_credito }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.liberar_cliente_provisorio.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.liberar_cliente_provisorio.label }}</label></div><div class="col-4">{{ form.liberar_cliente_provisorio }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_representante_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_representante_cliente.label }}</label></div><div class="col-4">{{ form.alterar_representante_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.cadastrar_comissao.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.cadastrar_comissao.label }}</label></div><div class="col-4">{{ form.cadastrar_comissao }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.excecao_comissao_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.excecao_comissao_cliente.label }}</label></div><div class="col-4">{{ form.excecao_comissao_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.excecao_comissao_pedido.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.excecao_comissao_pedido.label }}</label></div><div class="col-4">{{ form.excecao_comissao_pedido }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.grafico_ranking_vendas.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.grafico_ranking_vendas.label }}</label></div><div class="col-4">{{ form.grafico_ranking_vendas }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.grafico_vendas_representante.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.grafico_vendas_representante.label }}</label></div><div class="col-4">{{ form.grafico_vendas_representante }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.grafico_ranking_clientes.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.grafico_ranking_clientes.label }}</label></div><div class="col-4">{{ form.grafico_ranking_clientes }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.ver_valores_faturados.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.ver_valores_faturados.label }}</label></div><div class="col-4">{{ form.ver_valores_faturados }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.alterar_celular_sms_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.alterar_celular_sms_cliente.label }}</label></div><div class="col-4">{{ form.alterar_celular_sms_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.enviar_sms_pedido_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.enviar_sms_pedido_cliente.label }}</label></div><div class="col-4">{{ form.enviar_sms_pedido_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.enviar_sms_representante.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.enviar_sms_representante.label }}</label></div><div class="col-4">{{ form.enviar_sms_representante }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.controle_oda.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.controle_oda.label }}</label></div><div class="col-4">{{ form.controle_oda }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.apontamento_final_oda.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.apontamento_final_oda.label }}</label></div><div class="col-4">{{ form.apontamento_final_oda }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.imprimir_apontamento_final_oda.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.imprimir_apontamento_final_oda.label }}</label></div><div class="col-4">{{ form.imprimir_apontamento_final_oda }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.apontamento_itens_oda_producao.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.apontamento_itens_oda_producao.label }}</label></div><div class="col-4">{{ form.apontamento_itens_oda_producao }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.imprimir_oda_producao_prazo.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.imprimir_oda_producao_prazo.label }}</label></div><div class="col-4">{{ form.imprimir_oda_producao_prazo }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.posicao_odas.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.posicao_odas.label }}</label></div><div class="col-4">{{ form.posicao_odas }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.gerir_relacionamento_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.gerir_relacionamento_cliente.label }}</label></div><div class="col-4">{{ form.gerir_relacionamento_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.historico_conversas_cliente.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.historico_conversas_cliente.label }}</label></div><div class="col-4">{{ form.historico_conversas_cliente }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.criar_grupos_clientes.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.criar_grupos_clientes.label }}</label></div><div class="col-4">{{ form.criar_grupos_clientes }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.consultar_grupos_clientes.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.consultar_grupos_clientes.label }}</label></div><div class="col-4">{{ form.consultar_grupos_clientes }}</div></div>
+                        <div class="row mb-2 align-items-center"><div class="col-8 text-end"><label for="{{ form.gerenciar_clientes_grupos.id_for_label }}" class="col-form-label col-form-label-sm">{{ form.gerenciar_clientes_grupos.label }}</label></div><div class="col-4">{{ form.gerenciar_clientes_grupos }}</div></div>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-center">
+                    <a href="{% url 'sisven_users:usuario_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

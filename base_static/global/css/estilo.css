@@ -1,0 +1,67 @@
+/* Reduz o tamanho da fonte base para todo o corpo da página */
+body {
+    font-size: 0.9rem; /* Um pouco menor que o padrão */
+}
+
+/* Tabela principal: remove espaçamento excessivo e adiciona bordas sutis */
+.table {
+    font-size: 0.85rem; /* Fonte menor para as tabelas */
+}
+
+/* Células do cabeçalho e do corpo da tabela */
+.table th,
+.table td {
+    padding: 0.1rem 0.75rem; /* Reduz o padding vertical e horizontal */
+    vertical-align: middle;   /* Alinha o conteúdo verticalmente ao centro */
+}
+
+/* Ajusta o tamanho dos botões dentro das tabelas */
+.table .btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Formulários: reduz o tamanho dos campos e labels */
+.form-control,
+.form-select {
+    font-size: 0.8rem;
+}
+
+.form-label {
+    margin-bottom: 0.25rem; /* Menos espaço abaixo dos labels */
+}
+
+/* Deixa os títulos das seções mais compactos */
+h2 {
+    font-size: 1.4rem;
+}
+
+h5 {
+    font-size: 1.1rem;
+}
+
+/* Ajusta o espaçamento dos cards para um visual mais justo */
+.card {
+    margin-bottom: 0.7rem;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+#navbar-principal{
+    height: 3rem;
+
+}
+
+.navbar-toggler {
+    padding: 0.15rem 0.4rem; /* Reduz o espaçamento interno (padding) */
+    font-size: 0.9rem;      /* Reduz o tamanho da fonte, que influencia o ícone */
+     align-self: center;     /* Adicionado para alinhar verticalmente ao centro */
+}
+
+/* Alvo: O ícone (as três barrinhas) dentro do botão */
+.navbar-toggler-icon {
+    width: 1.2em;   /* Reduz a largura do ícone */
+    height: 1.2em;  /* Reduz a altura do ícone */
+}

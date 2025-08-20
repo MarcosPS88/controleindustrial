@@ -1,0 +1,6648 @@
+--- /dev/null
++++ b/c:\Projetos Python\ControleIBG\ibgcontrole\static\ibgcontrole\css\layout_ficha.css
+@@
++/* Estilos básicos para o corpo da página de impressão */
++body {
++    font-family: Arial, sans-serif;
++    margin: 0;
++    padding: 10mm; /* Margem para impressão */
++    box-sizing: border-box;
++    font-size: 10pt; /* Tamanho de fonte base */
++}
++
++/* Classes de borda */
++.borda { border: 1px solid black; }
++.borda-top { border-top: 1px solid black; }
++.borda-bottom { border-bottom: 1px solid black; }
++.borda-esquerda { border-left: 1px solid black; }
++.borda-direita { border-right: 1px solid black; }
++.borda-top-bottom { border-top: 1px solid black; border-bottom: 1px solid black; }
++.borda-esquerda-direita { border-left: 1px solid black; border-right: 1px solid black; }
++.borda-top-bottom-direita { border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; }
++.borda-top-bottom-esquerda { border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; }
++.borda-top-esquerda-direita { border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; }
++.borda-vermelha { border: 1px solid red; } /* Usado em um dos templates antigos */
++
++/* Classes de layout e alinhamento */
++.d-flex { display: flex; }
++.text-center { text-align: center; }
++.text-right { text-align: right; }
++.text-left { text-align: left; }
++
++/* Classes de cor de texto e fundo */
++.text-vermelho { color: red; }
++.bg-cinza { background-color: #e0e0e0; } /* Cinza claro */
++.bg-amarelo { background-color: #ffff00; } /* Amarelo */
++
++/* Classes de espaçamento (baseado em Bootstrap, mas simplificado) */
++.p-2 { padding: 0.5rem; } /* 1rem = 16px por padrão */
++.pt-2 { padding-top: 0.5rem; }
++.mb-0 { margin-bottom: 0; }
++
++/* Classes de altura */
++.height-5 { height: 5mm; } /* Altura em milímetros, comum para impressão */
++.height-10 { height: 10mm; }
++
++/* Estrutura principal */
++.div-principal {
++    width: 100%;
++    height: 287mm; /* Altura aproximada de uma folha A4 menos margens */
++    display: flex;
++    box-sizing: border-box;
++}
++
++/* Coluna Esquerda */
++.div-conteudo-esquerda {
++    flex: 0 0 65%; /* Ocupa 65% da largura */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++/* Coluna Direita */
++.div-conteudo-direita {
++    flex: 0 0 35%; /* Ocupa 35% da largura */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++/* Divisão Central (Corte) */
++.div-espaco-centro {
++    flex: 0 0 10mm; /* Espaço fixo para a linha de corte */
++    display: flex;
++    flex-direction: column;
++    justify-content: center;
++    align-items: center;
++    box-sizing: border-box;
++}
++
++.div-conteudo-centro-esquerda,
++.div-conteudo-centro-direita {
++    flex-grow: 1; /* Ocupa o espaço restante na coluna central */
++    width: 100%; /* Garante que ocupem a largura total da coluna central */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++.borda-divisao-corte {
++    width: 1px; /* Largura da linha de corte */
++    height: 100%; /* Ocupa toda a altura */
++    background-color: black;
++}
++
++/* Seção de Identificação (Topo da coluna esquerda) */
++.div-identificacao {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-identificacao-botao-acabado {
++    flex: 0 0 20%; /* Largura para o botão "BOTÃO ACABADO" */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++.div-identificacao-dados {
++    flex-grow: 1; /* Ocupa o restante da largura */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-identificacao-logo {
++    display: flex;
++    justify-content: space-between;
++    align-items: center;
++    padding: 5px;
++    box-sizing: border-box;
++}
++
++.div-logo img {
++    max-width: 100px; /* Ajuste conforme necessário */
++    height: auto;
++}
++
++.div-divisoria-identificacao {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-indentificacao-dados-esquerda {
++    flex-grow: 1;
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-indentificacao-dados-direita {
++    flex: 0 0 25%; /* Largura para a velocidade */
++    display: flex;
++    flex-direction: column;
++    justify-content: center;
++    align-items: center;
++    box-sizing: border-box;
++}
++
++.div-identificao-dados-interna {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-identificacao-label {
++    flex: 0 0 30%; /* Largura para os labels ARTIGO/TAMANHO */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-identificacao-dados-artigo {
++    flex-grow: 1;
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-label-velocidade {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-velocidade, .div-velocidade-2 {
++    width: 100%;
++    flex-grow: 1;
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++/* Seções de Dados de Operação (OP1 e OP2) */
++.div-dados-op1, .div-dados-op2 {
++    width: 100%;
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-dados-op1-mandril-op, .div-dados-op2-mandril-op {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-dados-mandril {
++    flex: 0 0 15%; /* Largura para a coluna Mandril */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-dados-tipo, .div-dados-ferramenta, .div-dados-espessura, .div-dados-observacao {
++    flex-grow: 1; /* Ocupam o restante da largura */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-dados-observacao {
++    flex: 0 0 30%; /* Observação pode ser um pouco mais larga */
++}
++
++.div-dados-op1-mandril-furacao, .div-dados-op2-mandril-furacao {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-furo-label, .div-furo-label-2op {
++    flex: 0 0 15%; /* Largura para o label Furo */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++.div-furo-dado {
++    flex: 0 0 30%; /* Largura para o dado do furo */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++.div-furo-observacao {
++    flex-grow: 1; /* Ocupa o restante */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++/* Seções de Fotos */
++.div-foto1-ficha-1op {
++    width: 100%;
++    display: flex;
++    flex-direction: column;
++    align-items: center;
++    box-sizing: border-box;
++}
++
++.div-foto1-ficha-1op img {
++    max-width: 170px; /* Ajuste conforme necessário */
++    height: auto;
++}
++
++.div-fotos-op1, .div-fotos-op2 {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-foto-1, .div-foto-2 {
++    flex-grow: 1;
++    display: flex;
++    flex-direction: column;
++    align-items: center;
++    box-sizing: border-box;
++}
++
++.div-foto-foto {
++    flex-grow: 1;
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++.div-foto-1 img, .div-foto-2 img {
++    max-width: 95px; /* Ajuste conforme necessário */
++    height: auto;
++}
++
++.div-foto-label {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++/* Seção Enviar Para (Layout 2 Operações) */
++.div-enviar-para {
++    width: 100%;
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-enviar-para-cima {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-enviar-para-esquerda {
++    flex-grow: 1;
++    box-sizing: border-box;
++}
++
++.div-enviar-para-label {
++    flex: 0 0 30%; /* Largura para o label ENVIAR PARA */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++.div-enviar-para-dados {
++    flex-grow: 1;
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-enviar-para-direita {
++    flex: 0 0 25%; /* Largura para a velocidade OP2 */
++    display: flex;
++    flex-direction: column;
++    justify-content: center;
++    align-items: center;
++    box-sizing: border-box;
++}
++
++.div-label-velocidade-2 {
++     width: 100%;
++     box-sizing: border-box;
++}
++
++/* Label 2ª Operação */
++.div-label-2op {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++/* Seção de Observação e Data (Rodapé da coluna esquerda) */
++.div-observacao, .div-observacao-2op {
++    width: 100%;
++    display: flex;
++    box-sizing: border-box;
++    flex-grow: 1; /* Ocupa o espaço restante na coluna */
++}
++
++.div-observacao-obs {
++    flex-grow: 1;
++    box-sizing: border-box;
++    overflow: hidden; /* Evita que o texto transborde */
++}
++
++.div-observacao-data {
++    flex: 0 0 25%; /* Largura para a data */
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    box-sizing: border-box;
++}
++
++/* Seção de Furação (Coluna direita) */
++.div-furacao-principal {
++    width: 100%;
++    display: flex;
++    box-sizing: border-box;
++}
++
++.div-furacao-label {
++    flex: 0 0 30%; /* Largura para o label Furação */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-furacao-dados {
++    flex-grow: 1;
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-box;
++}
++
++.div-tamanho {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-tamanho-label {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-tamanho-dados {
++    display: flex;
++    width: 100%;
++    box-sizing: border-box;
++}
++
++.div-tamanho-dados-label {
++    flex: 0 0 50%; /* Divide a largura com os dados */
++    display: flex;
++    flex-direction: column;
++    box-sizing: border-sizing;
++}
++
++.div-tamanho-dados-info {
++    flex-grow: 1;
++    display: flex;
++flex-direction: column;
++    box-sizing: border-box;
++}
++
++/* Fotos Freza e Mandril (Coluna direita) */
++.div-foto-freza, .div-foto-mandril {
++    width: 100%;
++    display: flex;
++    justify-content: center;
++    align-items: center;
++    flex-grow: 1; /* Ocupam o espaço restante */
++    box-sizing: border-box;
++}
++
++.div-foto-freza img, .div-foto-mandril img {
++    max-width: 200px; /* Ajuste conforme necessário */
++    height: auto;
++    max-height: 100%; /* Evita que a imagem transborde o contêiner */
++}
++
++/* Data de Impressão (Rodapé da coluna direita) */
++.div-data-impressao {
++    width: 100%;
++    box-sizing: border-box;
++}
++
++/* Estilos para impressão */
++@media print {
++    body {
++        margin: 0;
++        padding: 0;
++        font-size: 9pt; /* Pode reduzir um pouco a fonte para impressão */
++        -webkit-print-color-adjust: exact;
++        print-color-adjust: exact;
++    }
++
++    .div-principal {
++        height: 297mm; /* Altura total de uma folha A4 */
++        padding: 10mm; /* Margem interna para o conteúdo */
++        box-sizing: border-box;
++    }
++
++    /* Ajustes finos para quebras de página se necessário */
++    /* Evitar quebras dentro de seções importantes */
++    .div-identificacao,
++    .div-dados-op1,
++    .div-dados-op2,
++    .div-enviar-para,
++    .div-fotos-op1,
++    .div-fotos-op2,
++    .div-observacao,
++    .div-observacao-2op,
++    .div-furacao-principal,
++    .div-foto-freza,
++    .div-foto-mandril {
++        page-break-inside: avoid;
++    }
++
++    /* Forçar quebra de página antes de uma nova ficha, se estivesse imprimindo múltiplas */
++    /* @page { size: A4 portrait; margin: 10mm; } */
++}
++
++/* Ajustes para h1, h2, h3 para impressão */
++h1, h2, h3 {
++    margin: 0;
++    padding: 2px 5px; /* Pequeno padding para não colar no texto */
++    font-size: 1em; /* Usar em para escalabilidade */
++}
++
++h1 { font-size: 1.4em; }
++h2 { font-size: 1.2em; }
++h3 { font-size: 1em; }
++
++/* Ajustes específicos para alguns elementos */
++.div-identificacao-logo h1 {
++    font-size: 1.6em; /* Título principal maior */
++}
++
++.div-velocidade h2, .div-velocidade-2 h2 {
++    font-size: 2em; /* Velocidade em destaque */
++}
++
++/* Ajuste para garantir que o conteúdo não seja cortado */
++.div-conteudo-esquerda > div,
++.div-conteudo-direita > div {
++    min-height: 0; /* Permite que o flex item encolha */
++}
++
++/* Ajuste para a observação ocupar o espaço restante */
++.div-observacao-obs {
++    flex-grow: 1;
++}
++
++/* Ajuste para a altura das linhas de dados de operação */
++.div-dados-mandril h3,
++.div-dados-tipo h3,
++.div-dados-ferramenta h3,
++.div-dados-espessura h3,
++.div-dados-observacao h3 {
++    min-height: 18px; /* Altura mínima para cada linha de dado */
++    display: flex;
++    align-items: center;
++}
++
++.div-furo-label h3,
++.div-furo-dado h3,
++.div-furo-observacao h3 {
++     min-height: 18px; /* Altura mínima para a linha do furo */
++     display: flex;
++     align-items: center;
++}
++
++/* Ajuste para o padding dentro das células de dados */
++.div-dados-mandril h3,
++.div-dados-tipo h3,
++.div-dados-ferramenta h3,
++.div-dados-espessura h3,
++.div-dados-observacao h3,
++.div-furo-label h3,
++.div-furo-dado h3,
++.div-furo-observacao h3,
++.div-identificacao-label h3,
++.div-identificacao-dados-artigo h3,
++.div-tamanho-dados-label h3,
++.div-tamanho-dados-info h3 {
++    padding: 2px 5px;
++}
++
++/* Ajuste para as bordas internas dos dados de operação */
++.div-dados-mandril h3,
++.div-dados-tipo h3,
++.div-dados-ferramenta h3,
++.div-dados-espessura h3 {
++    border-right: 1px solid black;
++}
++
++.div-dados-mandril h3,
++.div-dados-tipo h3,
++.div-dados-ferramenta h3,
++.div-dados-espessura h3,
++.div-dados-observacao h3 {
++    border-bottom: 1px solid black;
++}
++
++.div-dados-mandril h3:last-child,
++.div-dados-tipo h3:last-child,
++.div-dados-ferramenta h3:last-child,
++.div-dados-espessura h3:last-child,
++.div-dados-observacao h3:last-child {
++    border-bottom: none;
++}
++
++.div-furo-label h3,
++.div-furo-dado h3 {
++    border-right: 1px solid black;
++}
++
++.div-identificacao-label h3 {
++    border-bottom: 1px solid black;
++}
++
++.div-identificacao-dados-artigo h3 {
++    border-bottom: 1px solid black;
++}
++
++.div-tamanho-dados-label h3,
++.div-tamanho-dados-info h3 {
++    border-bottom: 1px solid black;
++}
++
++.div-tamanho-dados-label h3:last-child,
++.div-tamanho-dados-info h3:last-child {
++    border-bottom: none;
++}
++
++/* Ajuste para a borda do label "Furação" */
++.div-furacao-label h3.borda-bottom-direita {
++    border-bottom: 1px solid black;
++    border-right: 1px solid black;
++}
++
++/* Ajuste para as bordas dos labels 2 Furos / 4 Furos */
++.div-furacao-label .height-10 {
++     border-bottom: 1px solid black;
++     border-right: 1px solid black;
++}
++
++.div-furacao-label .height-10:last-child {
++    border-bottom: none;
++}
++
++/* Ajuste para a borda do label "Diâmetro Broca" / "Abertura" */
++.div-tamanho-dados-label h3.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda do dado "Diâmetro Broca" / "Abertura" */
++.div-tamanho-dados-info h3.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda do label "ENVIAR PARA" */
++.div-enviar-para-label h3.borda-top-bottom-direita {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++    border-right: 1px solid black;
++}
++
++/* Ajuste para as bordas dos dados de ENVIAR PARA */
++.div-enviar-para-dados h3.borda-top-bottom {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++}
++
++.div-enviar-para-dados h3.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da velocidade OP2 */
++.div-velocidade-2.borda-top-bottom-esquerda {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda da observação e data no rodapé */
++.div-observacao-obs.borda-top-direita,
++.div-observacao-2op.borda-direita { /* A classe borda-direita foi usada no template 2op */
++    border-top: 1px solid black; /* Adiciona borda superior */
++    border-right: 1px solid black;
++}
++
++.div-observacao-data.borda-top {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda das fotos na 1op */
++.div-foto1-ficha-1op .borda-vermelha {
++    border: 1px solid red; /* Mantém a borda vermelha se for intencional */
++    width: 100%; /* Ocupa a largura total do contêiner */
++    display: flex;
++    justify-content: center;
++    align-items: center;
++    flex-grow: 1; /* Permite que a div da foto ocupe espaço */
++}
++
++.div-foto1-ficha-1op .borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para as bordas das fotos na 2op */
++.div-foto-1.borda-direita {
++    border-right: 1px solid black;
++}
++
++.div-fotos-op1.borda-bottom,
++.div-fotos-op2.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda do label da foto */
++.div-foto-label.borda-top,
++.div-foto-label.borda-top-bottom {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para o padding interno das divs de dados */
++.div-identificacao-label,
++.div-identificacao-dados-artigo,
++.div-dados-mandril,
++.div-dados-tipo,
++.div-dados-ferramenta,
++.div-dados-espessura,
++.div-dados-observacao,
++.div-furo-label,
++.div-furo-dado,
++.div-furo-observacao,
++.div-enviar-para-label,
++.div-enviar-para-dados,
++.div-furacao-label,
++.div-tamanho-label,
++.div-tamanho-dados-label,
++.div-tamanho-dados-info,
++.div-data-impressao {
++    padding: 2px; /* Pequeno padding interno */
++}
++
++/* Ajuste para a altura das divs de dados de furação */
++.div-furacao-label > div,
++.div-tamanho-dados-label > h3,
++.div-tamanho-dados-info > h3 {
++    min-height: 18px; /* Altura mínima para as linhas de furação */
++    display: flex;
++    align-items: center;
++}
++
++/* Ajuste para a borda do label "Furação" */
++.div-furacao-label > div:first-child h3 {
++    border-bottom: 1px solid black;
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda dos labels 2 Furos / 4 Furos */
++.div-furacao-label > div:nth-child(2) h3,
++.div-furacao-label > div:nth-child(3) h3 {
++    border-right: 1px solid black;
++}
++
++.div-furacao-label > div:nth-child(2) h3 {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda dos dados de furação */
++.div-tamanho-dados-label h3,
++.div-tamanho-dados-info h3 {
++    border-bottom: 1px solid black;
++}
++
++.div-tamanho-dados-label h3:last-child,
++.div-tamanho-dados-info h3:last-child {
++    border-bottom: none;
++}
++
++.div-tamanho-dados-label {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda do label "Diâmetro Broca" / "Abertura" */
++.div-tamanho-dados-label h3 {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda do dado "Diâmetro Broca" / "Abertura" */
++.div-tamanho-dados-info h3 {
++    border-right: none; /* Já tem a borda da div pai */
++}
++
++/* Ajuste para a borda da div de dados de furação */
++.div-furacao-dados.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da div de furação principal */
++.div-furacao-principal.borda {
++    border: 1px solid black;
++}
++
++/* Ajuste para a borda das fotos freza/mandril */
++.div-foto-freza.borda,
++.div-foto-mandril.borda {
++    border: 1px solid black;
++    border-top: none; /* Remove a borda superior se já houver uma div acima com borda inferior */
++}
++
++/* Ajuste para a borda da data de impressão */
++.div-data-impressao.borda {
++    border: 1px solid black;
++    border-top: none; /* Remove a borda superior */
++}
++
++/* Ajuste para a borda da div principal */
++.div-principal.borda {
++    border: 1px solid black;
++}
++
++/* Ajuste para a borda da coluna esquerda */
++.div-conteudo-esquerda.borda {
++    border: 1px solid black;
++    border-right: none; /* Remove a borda direita para não duplicar com a linha de corte */
++}
++
++/* Ajuste para a borda da coluna direita */
++.div-conteudo-direita.borda {
++    border: 1px solid black;
++    border-left: none; /* Remove a borda esquerda para não duplicar com a linha de corte */
++}
++
++/* Ajuste para a borda da divisão central */
++.div-espaco-centro.-amarela {
++    background-color: #ffff00; /* Amarelo */
++}
++
++.div-conteudo-centro-esquerda.borda-top-bottom-direita {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++    border-right: 1px solid black;
++}
++
++.div-conteudo-centro-direita.borda-top-bottom.borda-top-bottom-esquerda {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda da seção de identificação */
++.div-identificacao-botao-acabado h3.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++.div-identificacao-dados-logo.borda-esquerda {
++    border-left: 1px solid black;
++}
++
++.div-indentificacao-dados-esquerda h3.borda-top-esquerda-direita {
++    border-top: 1px solid black;
++    border-left: 1px solid black;
++    border-right: 1px solid black;
++}
++
++.div-indentificacao-dados-esquerda h3.borda-top-direita {
++    border-top: 1px solid black;
++    border-right: 1px solid black;
++}
++
++.div-indentificacao-dados-direita.bg-amarelo.borda-bottom {
++    background-color: #ffff00;
++    border-bottom: 1px solid black;
++}
++
++.div-label-velocidade h3.borda-top-bottom.bg-cinza {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++    background-color: #e0e0e0;
++}
++
++/* Ajuste para a borda da seção de dados OP1 */
++.div-dados-op1.borda-top-bottom {
++    border-top: 1px solid black;
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da seção de fotos 1op */
++.div-foto1-ficha-1op.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da seção de observação 1op */
++.div-observacao.d-flex.text-center {
++    /* A borda superior é aplicada nos elementos internos */
++}
++
++/* Ajuste para a borda da seção de fotos 2op */
++.div-fotos-op1.d-flex.borda-bottom,
++.div-fotos-op2.d-flex.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da seção enviar para */
++.div-enviar-para.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda do label 2op */
++.div-label-2op.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da seção de dados OP2 */
++.div-dados-op2.text-center.borda-bottom {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda da seção de observação 2op */
++.div-observacao-2op.d-flex.text-center {
++    /* A borda superior é aplicada nos elementos internos */
++}
++
++/* Ajuste para a borda da div principal no final */
++div.div-principal {
++    border: 1px solid black;
++}
++
++/* Ajuste para a borda da coluna esquerda no final */
++div.div-conteudo-esquerda {
++    border-right: 1px solid black; /* Adiciona a borda direita */
++}
++
++/* Ajuste para a borda da coluna direita no final */
++div.div-conteudo-direita {
++    border-left: 1px solid black; /* Adiciona a borda esquerda */
++}
++
++/* Ajuste para a borda da divisão central no final */
++div.div-espaco-centro {
++    border-left: 1px solid black; /* Adiciona a borda esquerda */
++    border-right: 1px solid black; /* Adiciona a borda direita */
++}
++
++/* Remover bordas duplicadas onde divs adjacentes já têm bordas */
++.div-conteudo-esquerda > div:not(:last-child) {
++    border-bottom: none; /* Remove a borda inferior se não for o último elemento */
++}
++
++.div-conteudo-direita > div:not(:last-child) {
++     border-bottom: none; /* Remove a borda inferior se não for o último elemento */
++}
++
++/* Adiciona borda inferior apenas ao último elemento de cada coluna */
++.div-conteudo-esquerda > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Exceção para a div-observacao e div-observacao-2op que já gerenciam suas bordas internas */
++.div-conteudo-esquerda > .div-observacao,
++.div-conteudo-esquerda > .div-observacao-2op {
++     border-bottom: none; /* Remove a borda inferior */
++}
++
++/* Exceção para a div-data-impressao que já gerencia suas bordas internas */
++.div-conteudo-direita > .div-data-impressao {
++    border-bottom: none; /* Remove a borda inferior */
++}
++
++/* Ajuste para a borda superior da div-observacao e div-observacao-2op */
++.div-observacao, .div-observacao-2op {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior da div-data-impressao */
++.div-data-impressao {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior da div-foto-freza e div-foto-mandril */
++.div-foto-freza, .div-foto-mandril {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior da div-furacao-principal */
++.div-furacao-principal {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior da div-dados-op1 e div-dados-op2 */
++.div-dados-op1, .div-dados-op2 {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior da div-enviar-para */
++.div-enviar-para {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior da div-label-2op */
++.div-label-2op {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior das divs de fotos 1op */
++.div-foto1-ficha-1op {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Ajuste para a borda superior das divs de fotos 2op */
++.div-fotos-op1, .div-fotos-op2 {
++    border-top: 1px solid black; /* Adiciona a borda superior */
++}
++
++/* Remover borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: none;
++}
++
++/* Ajuste específico para a borda superior da div-identificacao */
++.div-identificacao {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-identificacao */
++.div-identificacao {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-identificacao se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-identificacao + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-dados-op1 */
++.div-dados-op1 {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-dados-op1 se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-dados-op1 + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-enviar-para */
++.div-enviar-para {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-enviar-para se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-enviar-para + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-label-2op */
++.div-label-2op {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-label-2op se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-label-2op + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-dados-op2 */
++.div-dados-op2 {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-dados-op2 se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-dados-op2 + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior das divs de fotos 1op */
++.div-foto1-ficha-1op {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-foto1-ficha-1op se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-foto1-ficha-1op + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior das divs de fotos 2op */
++.div-fotos-op1 {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-fotos-op1 se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-fotos-op1 + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-fotos-op2 */
++.div-fotos-op2 {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-fotos-op2 se a próxima div já tiver borda superior */
++.div-conteudo-esquerda > .div-fotos-op2 + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-furacao-principal */
++.div-furacao-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-furacao-principal se a próxima div já tiver borda superior */
++.div-conteudo-direita > .div-furacao-principal + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-foto-freza */
++.div-foto-freza {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-foto-freza se a próxima div já tiver borda superior */
++.div-conteudo-direita > .div-foto-freza + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-foto-mandril */
++.div-foto-mandril {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-foto-mandril se a próxima div já tiver borda superior */
++.div-conteudo-direita > .div-foto-mandril + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda inferior da div-data-impressao */
++.div-data-impressao {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-data-impressao se for o último elemento */
++.div-conteudo-direita > .div-data-impressao:last-child {
++    border-bottom: none;
++}
++
++/* Ajuste para a borda inferior da div-observacao e div-observacao-2op */
++.div-observacao, .div-observacao-2op {
++    border-bottom: 1px solid black;
++}
++
++/* Remover borda inferior da div-observacao e div-observacao-2op se for o último elemento */
++.div-conteudo-esquerda > .div-observacao:last-child,
++.div-conteudo-esquerda > .div-observacao-2op:last-child {
++    border-bottom: none;
++}
++
++/* Ajuste para a borda direita da div-identificacao-botao-acabado */
++.div-identificacao-botao-acabado {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-indentificacao-dados-esquerda */
++.div-indentificacao-dados-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-dados-mandril */
++.div-dados-mandril {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-furo-label */
++.div-furo-label {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-furo-dado */
++.div-furo-dado {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-foto-1 */
++.div-foto-1 {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-enviar-para-label */
++.div-enviar-para-label {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-enviar-para-esquerda */
++.div-enviar-para-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-observacao-obs */
++.div-observacao-obs {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-furacao-label */
++.div-furacao-label {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-tamanho-dados-label */
++.div-tamanho-dados-label {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-conteudo-centro-esquerda */
++.div-conteudo-centro-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-centro-direita */
++.div-conteudo-centro-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-indentificacao-dados-direita */
++.div-indentificacao-dados-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-enviar-para-direita */
++.div-enviar-para-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-observacao-data */
++.div-observacao-data {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-data-impressao */
++.div-data-impressao {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-foto-freza */
++.div-foto-freza {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-foto-mandril */
++.div-foto-mandril {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-furacao-dados */
++.div-furacao-dados {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre colunas principais */
++.div-conteudo-esquerda.borda { border-right: none; }
++.div-conteudo-direita.borda { border-left: none; }
++.div-espaco-centro { border-left: 1px solid black; border-right: 1px solid black; }
++
++/* Ajuste final para a borda da div principal */
++.div-principal.borda {
++    border: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda:first-child { border-top-left-radius: 0; }
++.div-conteudo-esquerda:last-child { border-bottom-left-radius: 0; }
++.div-conteudo-direita:first-child { border-top-right-radius: 0; }
++.div-conteudo-direita:last-child { border-bottom-right-radius: 0; }
++
++/* Ajuste para a borda superior da primeira div em cada coluna */
++.div-conteudo-esquerda > div:first-child,
++.div-conteudo-direita > div:first-child {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da última div em cada coluna */
++.div-conteudo-esquerda > div:last-child,
++.div-conteudo-direita > div:last-child {
++    border-bottom: 1px solid black;
++}
++
++/* Remover bordas duplicadas entre divs adjacentes */
++.div-conteudo-esquerda > div + div,
++.div-conteudo-direita > div + div {
++    border-top: none;
++}
++
++/* Ajuste para a borda direita da div-conteudo-esquerda */
++.div-conteudo-esquerda {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-conteudo-direita */
++.div-conteudo-direita {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-espaco-centro */
++.div-espaco-centro {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-espaco-centro */
++.div-espaco-centro {
++    border-right: 1px solid black;
++}
++
++/* Ajuste para a borda superior da div-principal */
++.div-principal {
++    border-top: 1px solid black;
++}
++
++/* Ajuste para a borda inferior da div-principal */
++.div-principal {
++    border-bottom: 1px solid black;
++}
++
++/* Ajuste para a borda esquerda da div-principal */
++.div-principal {
++    border-left: 1px solid black;
++}
++
++/* Ajuste para a borda direita da div-principal */
++.div-principal {
++    border-right: 1px solid black;
++}
++
++/* Remover bordas duplicadas nos cantos */
++.div-conteudo-esquerda{:first-child { border-top-left-radius: 0; }}

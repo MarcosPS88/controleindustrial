@@ -1,0 +1,104 @@
+{% extends "global/base.html" %}
+
+{% block title %}Consulta de Preços de Venda - Sisven{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h2 class="my-4">Consulta de Preços de Venda</h2>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filtros de Busca</h5>
+            <form method="get" action="{% url 'sisven_consulta_precos:consulta' %}">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        {{ form.artigo.label_tag }}
+                        {{ form.artigo }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.tamanho.label_tag }}
+                        {{ form.tamanho }}
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">{{ form.moeda.label }}</label>
+                        <div class="d-flex">
+                            {% for radio in form.moeda %}
+                            <div class="form-check me-3">
+                                {{ radio.tag }}
+                                <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search me-2"></i> Pesquisar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if itens_preco %}
+    <!-- Adicionado um container para limitar a largura da tabela em telas grandes -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Resultados da Busca
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Artigo</th>
+                                <th scope="col">Tamanho</th>
+                                <th scope="col" class="text-end">Preço Venda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in itens_preco %}
+                            <tr>
+                                <td>{{ item.artigo }}</td>
+                                <td>{{ item.tamanho }}</td>
+                                <!-- Exibindo apenas o preço @100 -->
+                                <td class="text-end">{{ simbolo_moeda }} {{ item.preco_venda_100|floatformat:2 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paginação -->
+    {% if is_paginated %}
+    <nav aria-label="Paginação" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?{{ request.GET.urlencode }}&page=1">&laquo; Primeira</a></li>
+                <li class="page-item"><a class="page-link" href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}">Anterior</a></li>
+            {% endif %}
+
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">Próxima</a></li>
+                <li class="page-item"><a class="page-link" href="?{{ request.GET.urlencode }}&page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% elif request.GET %}
+    <div class="alert alert-info" role="alert">
+        Nenhum preço encontrado para os filtros informados.
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,198 @@
+.borda{
+    border: 1px solid red;
+}
+
+.borda-azul{
+    border: 1px solid blue;
+}
+
+
+
+
+/* Principal */
+body {
+            /* Adjust this value to the actual height of your fixed header */
+            /* The default Bootstrap navbar height is often 56px, but your header might be different. */
+            /* Example: padding-top: 70px; if your header is 70px tall */
+            padding-top: 65px; /* Please adjust this based on your _header.html's rendered height */
+         }
+#sidebarMenu {
+            /* Full height minus header height, makes sidebar scrollable independently */
+            height: calc(100vh - 65px); /* Adjust to match body's padding-top */
+            position: sticky;
+            overflow-y: auto; /* Allows scrolling for long sidebars */
+            z-index: 1000; /* Ensure it's above content but can be below a modal if needed */
+         
+         }
+.main-content-area {
+             /* Add some padding to the top of the main content area */
+             padding-top: 0.5rem; 
+         }
+         /* Ensure feather icons in the sidebar are vertically aligned with text */
+#sidebarMenu .feather {
+            vertical-align: text-bottom;
+         }
+
+
+#navbar-principal{
+    background-color: aquamarine;
+}
+
+
+
+
+
+
+#container-principal{
+   
+    
+}
+
+
+/*Header*/
+
+
+
+header{
+    background-color:#b6e3f8; 
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header img{
+    background-color: transparent;
+}
+
+#div-navbar-logo{
+    width: 80%;
+    
+    margin-right: auto;
+}
+
+#div-navbar-links{
+   
+    margin-left: auto;
+  
+}
+
+
+/* Casdatro de Artigos*/
+#div-artigo-cadastro{
+    
+}
+
+#container-artigo-cadastro p{
+    line-height: 30px; 
+    font-size: small; 
+
+    text-align: right;
+    margin-right: 5px;
+}
+
+#container-artigo-cadastro input {
+  
+    font-size: small;
+}
+
+
+
+
+
+#div-botao-artigo{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#div-botao-artigo button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+/* Pesquisa Artigos*/
+#div-artigo-list{
+    font-size: small;
+}
+
+/*Ficha TEcnica*/
+
+#ficha-tecnica-container{
+    font-size: small;
+   
+}
+
+#ficha-tecnica-container input{
+    font-size: small;
+    text-align: center;
+}
+
+#ficha-tecnica-container table{
+    font-size: small;
+    text-align: center;
+      
+
+}
+
+
+
+#div-ficha-tecnica{
+  font-size: small;
+}
+
+
+/* Reduz a margem inferior padrão dos campos renderizados pelo Crispy Forms.
+   O Crispy Forms para Bootstrap 5 envolve cada campo em um <div id="div_id_NOME_DO_CAMPO" class="mb-3">.
+   Vamos reduzir essa margem. */
+form div[id^="div_id_"] {
+    margin-bottom: 0.35rem !important; /* Padrão do Crispy/Bootstrap é mb-3 (1rem). Isso é ~mb-1.5 */
+}
+
+/* Reduz a margem inferior das labels explícitas no formulário */
+.form-label { /* Afeta todas as labels, incluindo form-label-sm */
+    margin-bottom: 0.15rem !important; /* Padrão do Bootstrap é 0.5rem */
+}
+
+/* Para os campos de etapa (Operação 1 e 2), reduzir padding e font-size dos inputs/selects */
+.etapa-form-row .form-control-sm,
+.etapa-form-row .form-select-sm {
+    padding-top: 0.15rem;    /* Padrão de .form-control-sm é 0.25rem */
+    padding-bottom: 0.15rem; /* Padrão de .form-control-sm é 0.25rem */
+    font-size: 0.8rem;       /* Padrão de .form-control-sm é 0.875rem. Isso diminui o texto. */
+}
+
+/* Ajustes adicionais de espaçamento vertical entre seções e elementos (baseado nas classes Bootstrap my-1, my-2, etc.) */
+/* Se você estiver usando essas classes diretamente no HTML, este CSS pode não ser necessário,
+   mas se quiser forçar espaçamentos menores globalmente para esses elementos no contexto do formulário: */
+
+/* Margens para títulos de seção */
+.container h5 { /* Seletor mais específico pode ser necessário se houver outros h5 */
+    margin-top: 0.5rem !important;  /* Equivalente a mt-2 */
+    margin-bottom: 0.25rem !important; /* Equivalente a mb-1 */
+}
+
+/* Margens para linhas divisórias <hr> */
+.container hr { /* Seletor mais específico pode ser necessário */
+    margin-top: 0.5rem !important;    /* Equivalente a my-2 (para cima) */
+    margin-bottom: 0.5rem !important; /* Equivalente a my-2 (para baixo) */
+}
+
+/* Margem para o container de imagens do artigo */
+#artigo-imagens-container {
+    margin-bottom: 0.5rem !important; /* Equivalente a mb-2 */
+}
+
+/* Margem para a div dos botões de ação */
+form > div.border-top { /* Seletor para a div que contém os botões Salvar/Cancelar */
+    margin-top: 0.5rem !important; /* Equivalente a mt-2 */
+}
+
+.deleted-row {
+    opacity: 0.5;
+    text-decoration: line-through;
+    background-color: #f8d7da; /* Cor de fundo para indicar exclusão */
+    transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
