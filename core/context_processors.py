@@ -68,7 +68,7 @@ def menu_processor(request):
         menu_itens.extend(menu_representante)
     
     # --- MENU PARA O CONTROLE DE PRODUÇÃO ---
-    if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
+        """ if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
         menu_producao = [
             {
                 'id': 'fichaTecnicaSubmenu', 'label': 'Ficha Técnica', 'icon': 'fa-clipboard-list',
@@ -174,6 +174,6 @@ def menu_processor(request):
                 ]
             },
         ]
-        menu_itens.extend(menu_producao)
+        menu_itens.extend(menu_producao)"""
 
     return {'menu_principal': menu_itens}
