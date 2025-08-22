@@ -4,11 +4,13 @@ from django import forms
 from sisven_core.models import Usuario, Representante
 
 CHOICES_SIM_NAO = (
+     
     ('N', 'Não'),
     ('S', 'Sim'),
 )
 
 CHOICES_STATUS = (
+    ('', 'Todos'),
     ('ATIVO', 'Ativo'),
     ('INATIVO', 'Inativo'),
 )
@@ -171,3 +173,38 @@ class RepresentanteForm(forms.ModelForm):
             'codigo_lista_preco': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
             'reptipven': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
         }
+
+class UsuarioFilterForm(forms.Form):
+    """Formulário para filtrar a lista de Usuários."""
+    search_name = forms.CharField(
+        label='Nome do Usuário',
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Pesquisar por nome...'
+        })
+    )
+    status = forms.ChoiceField(
+        label='Status',
+        choices=CHOICES_STATUS,
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+
+
+class RepresentanteFilterForm(forms.Form):
+    """Formulário para filtrar a lista de Representantes."""
+    search_name = forms.CharField(
+        label='Nome do Representante',
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Pesquisar por nome...'
+        })
+    )
+    status = forms.ChoiceField(
+        label='Status',
+        choices=CHOICES_STATUS,
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )

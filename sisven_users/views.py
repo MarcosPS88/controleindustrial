@@ -1,29 +1,45 @@
 # sisven_users/views.py
 
-from sisven_core.auth_mixins import SisvenAdminRequiredMixin# <-- Importe aqui
+from sisven_core.auth_mixins import (SisvenAdminRequiredMixin,
+                                     SisvenRepresentantesRequiredMixin)
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
 from sisven_core.models import Usuario, Representante
-from .forms import UsuarioForm, RepresentanteForm
+from .forms import (UsuarioForm, 
+                    RepresentanteForm,
+                    RepresentanteFilterForm,
+                    UsuarioFilterForm,
+                    )
 
 # --- Views para Usuários ---
 
-class UsuarioListView(SisvenAdminRequiredMixin, ListView):
+class UsuarioListView(SisvenAdminRequiredMixin,ListView): 
     model = Usuario
     template_name = 'sisven_users/usuario_list.html'
     context_object_name = 'usuarios'
     paginate_by = 20
 
     def get_queryset(self):
-        # O router direcionará esta leitura para o banco 'sisven' automaticamente
         queryset = Usuario.objects.order_by('nome')
-        search_name = self.request.GET.get('search_name', None)
+        form = UsuarioFilterForm(self.request.GET)
 
-        if search_name:
-            queryset = queryset.filter(nome__icontains=search_name)
+        if form.is_valid():
+            search_name = form.cleaned_data.get('search_name')
+            status = form.cleaned_data.get('status')
+
+            if search_name:
+                queryset = queryset.filter(nome__icontains=search_name)
             
+            if status:
+                queryset = queryset.filter(status=status)
+                
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = UsuarioFilterForm(self.request.GET or None)
+        return context
 
 class UsuarioCreateView(SisvenAdminRequiredMixin, CreateView):
     model = Usuario
@@ -58,7 +74,7 @@ class UsuarioUpdateView(SisvenAdminRequiredMixin, UpdateView):
 
 # --- Views para Representantes ---
 
-class RepresentanteListView(SisvenAdminRequiredMixin, ListView):
+class RepresentanteListView(SisvenAdminRequiredMixin, ListView): 
     model = Representante
     template_name = 'sisven_users/representante_list.html'
     context_object_name = 'representantes'
@@ -66,12 +82,29 @@ class RepresentanteListView(SisvenAdminRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = Representante.objects.order_by('nome')
-        search_name = self.request.GET.get('search_name', None)
+        
+        # Instancia o formulário com os dados da requisição (GET)
+        form = RepresentanteFilterForm(self.request.GET)
 
-        if search_name:
-            queryset = queryset.filter(nome__icontains=search_name)
+        # Valida o formulário para acessar cleaned_data
+        if form.is_valid():
+            search_name = form.cleaned_data.get('search_name')
+            status = form.cleaned_data.get('status')
+
+            if search_name:
+                queryset = queryset.filter(nome__icontains=search_name)
             
+            # Aplica o filtro de status apenas se um valor for selecionado
+            if status:
+                queryset = queryset.filter(status=status)
+                
         return queryset
+
+    def get_context_data(self, **kwargs):
+        # Adiciona o formulário ao contexto para ser usado no template
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = RepresentanteFilterForm(self.request.GET or None)
+        return context
 
 class RepresentanteCreateView(SisvenAdminRequiredMixin, CreateView):
     model = Representante

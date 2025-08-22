@@ -98,3 +98,8 @@ htmlcov/
 # Operating System files
 .DS_Store
 Thumbs.db
+
+#Configurações
+gunicorn.txt
+nginx.txt
+nginx-http.txt
