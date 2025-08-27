@@ -1,13 +1,13 @@
 {% load static %}
-<nav id="navbar-principal"  class="navbar navbar-expand-lg navbar-light bg-secondary fixed-top">
+<nav id="navbar-principal"  class="navbar navbar-expand-xl navbar-light bg-secondary fixed-top">
     <div class="container-fluid">
         <!-- Logo à esquerda -->
-        <a class="navbar-brand" href="{% url 'core:index' %}">
+        <a class="navbar-brand" href="{% if home_url_name %}{% url home_url_name %}{% else %}#{% endif %}">
             <img src="{% static 'global/img/logo.png' %}" alt="Logo da Empresa" width="50px">
         </a>
 
         <!-- Botão de toggle para telas menores (hambúrguer) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -18,7 +18,7 @@
               mas com a classe 'd-md-none', ela SÓ será visível em telas pequenas (mobile),
               evitando duplicação em telas grandes.
             -->
-            <div class="d-md-none mt-3">
+            <div class="d-xl-none mt-3">
                 {% include "global/partials/_barra_lateral.html" %}
             </div>
         </div>

@@ -1,0 +1,27 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}{{ titulo_sistema }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Cabeçalho da Página -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ titulo_sistema }}</h1>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Página Inicial</h6>
+        </div>
+        <div class="card-body">
+            <h4>Bem vindo, {{ user.get_full_name|default:user.username }}!</h4>
+            <p class="lead">
+                Portal de acesso ao controle de produção e industrial.
+            </p>
+            <p>Utilize o menu lateral para acessar as funcionalidades de cada setor.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

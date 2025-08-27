@@ -8,12 +8,10 @@ class SisvenAuthBackend(BaseBackend):
 
         # Tenta encontrar um Representante primeiro
         try:
-            # CORREÇÃO: Adicionado .using(db_legado) para forçar a consulta no banco correto.
             rep = Representante.objects.using(db_legado).get(login=username)
             
-            # ATENÇÃO: Verificação de senha em texto puro.
+            # Verificação de senha em texto puro.
             if rep.senha == password:
-                # Usamos um prefixo para evitar conflito de usernames no banco do Django
                 user, created = User.objects.get_or_create(username=f"rep_{username}")
                 if created:
                     # Garante que o grupo existe antes de tentar adicioná-lo
@@ -21,11 +19,10 @@ class SisvenAuthBackend(BaseBackend):
                     user.groups.add(group)
                 return user
         except Representante.DoesNotExist:
-            pass # Se não for representante, continua para tentar como usuário
+            pass 
 
         # Tenta encontrar um Usuário do sistema
         try:
-            # CORREÇÃO: Adicionado .using(db_legado) para forçar a consulta no banco correto.
             usr = Usuario.objects.using(db_legado).get(login=username)
 
             if usr.senha == password:
@@ -35,7 +32,7 @@ class SisvenAuthBackend(BaseBackend):
                     user.groups.add(group)
                 return user
         except Usuario.DoesNotExist:
-            return None # Usuário não encontrado em nenhuma das tabelas
+            return None 
         
         return None # Senha incorreta
 

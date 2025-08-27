@@ -11,20 +11,17 @@
         </a>
     </div>
 
+    <!-- Formulário de Busca -->
     <div class="card shadow-sm mb-2">
         <div class="card-body">
-            <form method="get" class="row g-3 align-items-end">
-                <div class="col-md-5">
-                    <label for="{{ filter_form.search_name.id_for_label }}" class="form-label">{{ filter_form.search_name.label }}</label>
-                    {{ filter_form.search_name }}
+            <form method="get" class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="search_name" class="visually-hidden">Nome</label>
+                    <input type="text" class="form-control" name="search_name" id="search_name" placeholder="Pesquisar por nome..." value="{{ request.GET.search_name }}">
                 </div>
-                <div class="col-md-3">
-                    <label for="{{ filter_form.status.id_for_label }}" class="form-label">{{ filter_form.status.label }}</label>
-                    {{ filter_form.status }}
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-search me-2"></i> Filtrar
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
             </form>

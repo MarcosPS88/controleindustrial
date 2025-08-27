@@ -43,7 +43,7 @@
                 <strong><span>{{ request.user.username|default:'Usuário' }}</span></strong>
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                <li><a class="dropdown-item" href="{% url 'core:logout' %}">Sair</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
             </ul>
         </div>
     </div>

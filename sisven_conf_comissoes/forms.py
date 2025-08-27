@@ -6,7 +6,7 @@ from sisven_core.models import (ComRepSub,
                                 )
 
 class ComRepSubForm(forms.ModelForm):
-    # Campo para selecionar o representante de uma lista.
+    
     representante = forms.ModelChoiceField(
         queryset=Representante.objects.order_by('nome'),
         label="Representante",
@@ -28,8 +28,7 @@ class ComRepSubForm(forms.ModelForm):
 
 
 class ComCliEspForm(forms.ModelForm):
-    # NOTA: Para uma lista grande de clientes, o ideal é usar um widget de autocomplete.
-    # Para começar, um ModelChoiceField funciona.
+
     cliente = forms.ModelChoiceField(
         queryset=Cliente.objects.order_by('clinom'),
         label="Cliente",

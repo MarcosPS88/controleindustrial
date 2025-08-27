@@ -1,14 +1,28 @@
+# core/context_processors.py
+
 def menu_processor(request):
     """
-    Este processador de contexto define qual menu será exibido na barra lateral
-    de forma ACUMULATIVA, com base nos grupos do usuário logado.
+    Este processador de contexto define o menu de forma ACUMULATIVA e a 
+    URL da página inicial com base nos grupos do usuário logado.
     """
     menu_itens = []
+    home_url_name = None  # Valor padrão para a URL da página inicial
 
     if not request.user.is_authenticated:
-        return {'menu_principal': menu_itens}
+        return {'menu_principal': menu_itens, 'home_url_name': home_url_name}
 
     grupos_usuario = set(request.user.groups.values_list('name', flat=True))
+
+    # --- 1. DEFINE O CONTEXTO PRINCIPAL (HOME URL) ---
+    # Esta seção permanece INTOCADA
+    if 'Sisven Admin' in grupos_usuario:
+        home_url_name = 'home_admin'
+    elif 'Sisven Representantes' in grupos_usuario:
+        home_url_name = 'home_vendas'
+    elif 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
+        home_url_name = 'home_ibg'
+
+    # --- 2. CONSTRÓI O MENU DE FORMA ACUMULATIVA ---
 
     # --- MENU PARA USUÁRIOS DO SISVEN (Permissões de Consulta) ---
     if 'Sisven Usuarios' in grupos_usuario:
@@ -16,13 +30,15 @@ def menu_processor(request):
             {
                 'id': 'consultasSubmenu', 'label': 'Consultas', 'icon': 'fa-search',
                 'sub_itens': [
-                    {'url_name': 'sisven_consulta_precos:consulta', 'label': 'Consultar Preços'},
+                    # CORREÇÃO CIRÚRGICA 1: Aponta para o namespace do admin
+                    {'url_name': 'admin-precos:consulta', 'label': 'Consultar Preços'},
                 ]
             },
         ]
         menu_itens.extend(menu_consultas)
 
     # --- MENU PARA USUÁRIOS DO SISVEN (ADMINISTRATIVO) ---
+    # Esta seção permanece INTOCADA
     if 'Sisven Admin' in grupos_usuario:
         menu_admin = [
             {
@@ -32,8 +48,7 @@ def menu_processor(request):
                     {'url_name': 'sisven_users:representante_list', 'label': 'Representantes'},
                 ]
             },
-
-             {
+            {
                 'id': 'comissoesSubmenu', 'label': 'Configurar Comissões', 'icon': 'fa-percent',
                 'sub_itens': [
                     {'url_name': 'sisven_conf_comissoes:com_rep_sub_list', 'label': 'Por Representante'},
@@ -48,28 +63,28 @@ def menu_processor(request):
         menu_representante = [
             {
                 'id': 'pedidosRepSubmenu', 'label': 'Pedidos', 'icon': 'fa-shopping-cart',
-                'sub_itens': [
-                    # {'url_name': 'vendas:novo_pedido', 'label': 'Digitar Pedido'},
-                ]
+                'sub_itens': []
             },
             {
                 'id': 'catalogoRepSubmenu', 'label': 'Catálogo', 'icon': 'fa-book-open',
                 'sub_itens': [
-                    {'url_name': 'sisven_consulta_precos:consulta', 'label': 'Consultar Preços de Venda'},
+                    # CORREÇÃO CIRÚRGICA 2: Aponta para o namespace de vendas
+                    {'url_name': 'vendas-precos:consulta', 'label': 'Consultar Preços de Venda'},
+                    {'url_name': 'vendas-rendimento:consulta_rendimento_vendas', 'label': 'Consultar Quantidade Mínima'},
                 ]
             },
             {
                 'id': 'financeiroRepSubmenu', 'label': 'Financeiro', 'icon': 'fa-file-invoice-dollar',
-                'sub_itens': [
-                    # {'url_name': 'financeiro:titulos_aberto', 'label': 'Títulos em Aberto'},
-                ]
+                'sub_itens': []
             },
         ]
         menu_itens.extend(menu_representante)
     
-    # --- MENU PARA O CONTROLE DE PRODUÇÃO ---
-        """ if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
+    """ # --- MENU PARA O CONTROLE DE PRODUÇÃO ---
+    # Esta seção permanece INTOCADA
+    if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
         menu_producao = [
+            # ... (conteúdo do menu de produção permanece o mesmo)
             {
                 'id': 'fichaTecnicaSubmenu', 'label': 'Ficha Técnica', 'icon': 'fa-clipboard-list',
                 'sub_itens': [
@@ -176,4 +191,5 @@ def menu_processor(request):
         ]
         menu_itens.extend(menu_producao)"""
 
-    return {'menu_principal': menu_itens}
+    # Retorna o dicionário completo para o contexto do template
+    return {'menu_principal': menu_itens, 'home_url_name': home_url_name}

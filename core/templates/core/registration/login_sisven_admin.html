@@ -12,8 +12,8 @@
             <!-- Logo e Título -->
             <div class="text-center mb-1">
              
-                <h1 class="h3 mb-1 fw-normal">Sistema de Controle</h1>
-                <p class="text-muted">Acesse para gerenciar a produção.</p>
+                <h1 class="h3 mb-1 fw-normal">Sistema de Vendas Adminstração</h1>
+                <p class="text-muted">Acesse como usuário para acessar configurações do sistema.</p>
             </div>
 
             <!-- Card do Formulário -->
@@ -40,7 +40,7 @@
                         {% endif %}
                     {% endif %}
 
-                    <form method="post" action="{% url 'core:login' %}">
+                    <form method="post" action="{% url 'login_sisven_admin' %}">
                         {% csrf_token %}
                         {{ form.username|as_crispy_field }}
                         {{ form.password|as_crispy_field }}

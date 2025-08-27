@@ -1,0 +1,108 @@
+/* ==========================================================================
+   ARQUIVO: forms.css
+   Estilos reutilizáveis para formulários, com foco em tablets.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ESTILOS COMPACTOS PARA O FORMULÁRIO DE APONTAMENTO DE PASTILHAS
+   (Aplicado em telas de tablet e menores, < 1200px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1199.98px) {
+    .form-apontamento-escolha-pastilhas .card { margin-bottom: 0.5rem; }
+    .form-apontamento-escolha-pastilhas .card-header { padding: 0.3rem 0.8rem; font-size: 0.9rem; }
+    .form-apontamento-escolha-pastilhas .card-body { padding: 0.75rem; }
+    .form-apontamento-escolha-pastilhas p { font-size: 0.8rem; margin-bottom: 0.2rem !important; }
+    .form-apontamento-escolha-pastilhas h4 { font-size: 1.1rem; }
+    .form-apontamento-escolha-pastilhas h5 { font-size: 0.9rem; }
+    .form-apontamento-escolha-pastilhas h6 { font-size: 0.85rem; margin-bottom: 0.1rem; }
+    .form-apontamento-escolha-pastilhas .form-label { font-size: 0.8rem; margin-bottom: 0.1rem; }
+    .form-apontamento-escolha-pastilhas .form-control,
+    .form-apontamento-escolha-pastilhas .form-select { font-size: 0.9rem; padding: 0.2rem 0.5rem; height: auto; }
+    .form-apontamento-escolha-pastilhas .mb-3 { margin-bottom: 0.3rem !important; }
+    .form-apontamento-escolha-pastilhas .form-text { font-size: 0.7rem; margin-top: 0.1rem; }
+    .form-apontamento-escolha-pastilhas hr { margin-top: 0.4rem; margin-bottom: 0.6rem; }
+    .form-apontamento-escolha-pastilhas .btn { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+
+    /* Reduz o espaçamento interno do painel de status */
+    .form-apontamento-escolha-pastilhas .status-saldo-compacto .card-body {
+        padding: 0.5rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   AJUSTES ESPECÍFICOS PARA TABLET NA HORIZONTAL (LANDSCAPE)
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) and (orientation: landscape) {
+    /* Reduz o espaço entre o header do site e o início do conteúdo */
+    .form-apontamento-escolha-pastilhas {
+        margin-top: 0.25rem !important;
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   ESTILOS COMPACTOS PARA O FORMULÁRIO DE APONTAMENTO DE TORNOS
+   (Aplicado em telas de tablet e menores, < 1200px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1199.98px) {
+    .form-apontamento-tornos .card { 
+        margin-bottom: 0.5rem; 
+    }
+    .form-apontamento-tornos .card-header { 
+        padding: 0.3rem 0.8rem; 
+        font-size: 0.9rem; 
+    }
+    .form-apontamento-tornos .card-body { 
+        padding: 0.75rem; 
+    }
+    .form-apontamento-tornos p { 
+        font-size: 0.8rem; 
+        margin-bottom: 0.2rem !important; 
+    }
+    .form-apontamento-tornos h4 { font-size: 1.1rem; }
+    .form-apontamento-tornos h5 { font-size: 0.9rem; }
+    .form-apontamento-tornos h6 { 
+        font-size: 0.85rem; 
+        margin-bottom: 0.1rem; 
+    }
+    .form-apontamento-tornos .form-label { 
+        font-size: 0.8rem; 
+        margin-bottom: 0.1rem; 
+    }
+    .form-apontamento-tornos .form-control,
+    .form-apontamento-tornos .form-select { 
+        font-size: 0.9rem; 
+        padding: 0.2rem 0.5rem; 
+        height: auto; 
+    }
+    .form-apontamento-tornos .mb-3 { 
+        margin-bottom: 0.3rem !important; 
+    }
+    .form-apontamento-tornos .form-text { 
+        font-size: 0.7rem; 
+        margin-top: 0.1rem; 
+    }
+    .form-apontamento-tornos hr { 
+        margin-top: 0.4rem; 
+        margin-bottom: 0.6rem; 
+    }
+    .form-apontamento-tornos .btn { 
+        padding: 0.3rem 0.8rem; 
+        font-size: 0.85rem; 
+    }
+
+    /* Reduz o espaçamento interno do painel de status */
+    .form-apontamento-tornos .status-saldo-compacto .card-body {
+        padding: 0.5rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   AJUSTES ESPECÍFICOS PARA TABLET NA HORIZONTAL (LANDSCAPE)
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) and (orientation: landscape) {
+    /* Reduz o espaço entre o header do site e o início do conteúdo */
+    .form-apontamento-tornos {
+        margin-top: 0.25rem !important;
+    }
+}

@@ -40,7 +40,7 @@
                         {% endif %}
                     {% endif %}
 
-                    <form method="post" action="{% url 'core:login' %}">
+                    <form method="post" action="{% url 'login_ibg' %}">
                         {% csrf_token %}
                         {{ form.username|as_crispy_field }}
                         {{ form.password|as_crispy_field }}

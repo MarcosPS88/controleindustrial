@@ -95,6 +95,10 @@ WSGI_APPLICATION = 'controle_industrial.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #},
 
     'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -218,9 +222,3 @@ LOGGING = {
 LOGIN_URL = 'login'  # O nome da sua URL de login
 LOGOUT_REDIRECT_URL = 'login' # Para onde redirecionar após o logout (ex: página inicial)
 LOGIN_REDIRECT_URL = 'core:index'
-
-
-try:
-    from controle_industrial.local_settings import *
-except ImportError:
-    print('Não leu settings')

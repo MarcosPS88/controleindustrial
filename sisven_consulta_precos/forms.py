@@ -9,13 +9,13 @@ class PrecoSearchForm(forms.Form):
     artigo = forms.CharField(
         label='Código do Artigo',
         max_length=20,
-        required=False, # Permite buscas sem preencher o artigo
+        required=False, 
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 12345'})
     )
     tamanho = forms.CharField(
         label='Tamanho',
         max_length=10,
-        required=False, # Permite buscas sem preencher o tamanho
+        required=False, 
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 24'})
     )
     moeda = forms.ChoiceField(
