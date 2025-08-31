@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ibgcontrole',
-    'cadastros',
-    'producao',
+    #'ibgcontrole',
+    #'cadastros',
+    #'producao',
     'django_bootstrap5',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -226,7 +226,7 @@ LOGIN_URL = 'login'  # O nome da sua URL de login
 LOGOUT_REDIRECT_URL = 'login' # Para onde redirecionar após o logout (ex: página inicial)
 LOGIN_REDIRECT_URL = 'core:index'
 
-"""try:
+try:
     from controle_industrial.local_settings import *
 except ImportError:
-    print('Não leu settings')"""
+    print('Não leu settings')
