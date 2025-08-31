@@ -159,7 +159,7 @@ class Representante(models.Model):
     )
 
     def __str__(self):
-        return f'{self.codigo} - {self.nome}'
+        return f'{self.codigo} - {self.nome} - {self.rep_tipo}'
 
     class Meta:
         managed = False

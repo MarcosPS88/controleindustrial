@@ -9,9 +9,9 @@ from django.core.exceptions import ValidationError
 
 class ComRepSubForm(forms.ModelForm):
     representante = forms.ModelChoiceField(
-        queryset=Representante.objects.order_by('nome'),
+        queryset=Representante.objects.filter(rep_tipo='PRESENCIAL').order_by('nome'),
         label="Representante",
-        widget=forms.Select(attrs={'class': 'form-select'})
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
 
     class Meta:
@@ -23,8 +23,8 @@ class ComRepSubForm(forms.ModelForm):
             'percentual_comissao': 'Percentual de Comissão (%)',
         }
         widgets = {
-            'dias_max_sem_visita': forms.NumberInput(attrs={'class': 'form-control'}),
-            'percentual_comissao': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
+            'dias_max_sem_visita': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
+            'percentual_comissao': forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'step': '0.01'}),
         }
 
 
