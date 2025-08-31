@@ -1,0 +1,35 @@
+{% extends 'global/base.html' %}
+{% load humanize %}
+
+{% block title %}Fila de Produção - Expedição{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3><i class="fas fa-shipping-fast me-2"></i>Fila de Produção - Expedição</h3>
+            <p class="mb-0 text-muted">Selecione um cliente para conferir as caixas fechadas pela embalagem.</p>
+        </div>
+        <div class="card-body p-0">
+            {% if clientes %}
+            <div class="list-group list-group-flush">
+                {% for cliente in clientes %}
+                <a href="{% url 'producao:detalhe_cliente_expedicao' cliente_id=cliente.id %}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ cliente.nome }}</h5>
+                        <small>Cód: {{ cliente.codigo_cliente }}</small>
+                    </div>
+                    <p class="mb-1 text-muted">Clique para conferir as caixas e registrar o peso.</p>
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="alert alert-success m-3 text-center">
+                <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Tudo em dia!</h4>
+                <p class="mb-0">Nenhum cliente com caixas aguardando conferência na expedição.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

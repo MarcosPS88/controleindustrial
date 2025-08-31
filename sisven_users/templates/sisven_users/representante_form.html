@@ -19,8 +19,9 @@
                 
                 <h5 class="mb-3 border-bottom pb-2">Dados de Identificação</h5>
                 <div class="row">
-                    <div class="col-md-8 mb-3">{{ form.nome|as_crispy_field }}</div>
-                    <div class="col-md-4 mb-3">{{ form.codigo|as_crispy_field }}</div>
+                    <div class="col-md-6 mb-3">{{ form.nome|as_crispy_field }}</div>
+                    <div class="col-md-3 mb-3">{{ form.codigo|as_crispy_field }}</div>
+                    <div class="col-md-3 mb-3">{{ form.rep_tipo|as_crispy_field }}</div>
                     <div class="col-md-4 mb-3">{{ form.login|as_crispy_field }}</div>
                     <div class="col-md-4 mb-3">{{ form.senha|as_crispy_field }}</div>
                     <div class="col-md-4 mb-3">{{ form.status|as_crispy_field }}</div>
@@ -31,7 +32,6 @@
                     <div class="col-md-4 mb-3">{{ form.email_pessoal|as_crispy_field }}</div>
                     <div class="col-md-2 mb-3">{{ form.celular|as_crispy_field }}</div>
                     <div class="col-md-3 mb-3">{{ form.codigo_lista_preco|as_crispy_field }}</div>
-                    <!-- CORREÇÃO: Campo que estava faltando foi adicionado aqui -->
                     <div class="col-md-3 mb-3">{{ form.reptipven|as_crispy_field }}</div>
                 </div>
 

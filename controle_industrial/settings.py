@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'ibgcontrole',
-    #'cadastros',
-    #'producao',
+    'ibgcontrole',
+    'cadastros',
+    'producao',
     'django_bootstrap5',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -52,7 +52,9 @@ INSTALLED_APPS = [
     'sisven_consulta_precos',
     'sisven_conf_comissoes',
     'sisven_core',
-    'core', 
+    'core',
+    'acedata_core',
+    'sisven_pedidos',
 
 ]
 
@@ -130,15 +132,16 @@ DATABASES = {
     
     'sisven': {
         'ENGINE': 'django.db.backends.mysql', # Ou o engine do seu banco: postgresql, oracle, etc.
-        'NAME': 'sisventestebkp',
-        'USER': 'root',
-        'PASSWORD': 'Ibg_6000@',
-        'HOST': 'localhost', # ex: '192.168.1.100'
+        'NAME': 'sisventeste',
+        'USER': 'juliano',
+        'PASSWORD': 'myjaljqp',
+        'HOST': '201.16.169.4', # ex: '192.168.1.100'
         'PORT': '3306', # Porta padrão do MySQL
     },
 }
 
-DATABASE_ROUTERS = ['sisven_core.routers.LegadoRouter']
+DATABASE_ROUTERS = ['sisven_core.routers.LegadoRouter',
+                    'acedata_core.routers.AcedataRouter']
 
 AUTHENTICATION_BACKENDS = [
     'sisven_core.authentication.SisvenAuthBackend',
@@ -222,7 +225,6 @@ LOGGING = {
 LOGIN_URL = 'login'  # O nome da sua URL de login
 LOGOUT_REDIRECT_URL = 'login' # Para onde redirecionar após o logout (ex: página inicial)
 LOGIN_REDIRECT_URL = 'core:index'
-
 
 try:
     from controle_industrial.local_settings import *

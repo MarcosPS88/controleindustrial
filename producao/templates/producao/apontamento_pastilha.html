@@ -1,0 +1,248 @@
+{% extends "global/base.html" %}
+{% load django_bootstrap5 %}
+{% load l10n %}
+{% load humanize %}
+
+{% block title %}Apontamento - {{ setor_nome }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1 form-apontamento-escolha-pastilhas">
+    <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-edit"></i> Apontamento: {{ setor_nome }}</h4>
+            <a href="{% url 'producao:lista_ops_pastilha' %}" class="btn btn-light btn-sm">
+                <i class="fas fa-arrow-left me-1"></i> Voltar para a Lista
+            </a>
+        </div>
+        <div class="card-body">
+            <!-- Seção de Detalhes da Ordem de Produção -->
+            <div class="card mb-1">
+                <div class="card-header">
+                    <strong>Detalhes da Ordem de Produção</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6"><p><strong>OP:</strong> <a style="text-decoration: none;" href="{% url 'producao:detalhes_op' op_id=ordem_producao.id %}" class="fw-bold">{{ ordem_producao.numero_op }}</a></p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Emissão:</strong> {{ ordem_producao.data_emissao|date:"d/m/Y" }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Artigo:</strong> {{ ordem_producao.artigo }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Material:</strong> {{ ordem_producao.material }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Tamanho:</strong> {{ ordem_producao.tamanho }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Cor:</strong> {{ ordem_producao.cor }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Furação:</strong> {{ ordem_producao.furacao }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Acabamento:</strong> {{ ordem_producao.acabamento }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Qtd. Programada:</strong> {{ ordem_producao.quantidade_alvo_producao|floatformat:2 }} {{ ordem_producao.unidade }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Peso Previsto:</strong> {{ ordem_producao.peso_previsto|floatformat:2 }} Kg</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Cliente(s):</strong> {{ clientes_display }}</p></div>
+                        <div class="col-lg-3 col-sm-6"><p><strong>Pedido(s):</strong> {{ pedidos_display }}</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel de Status do Saldo -->
+            <div class="card mb-1 border-info status-saldo-compacto">
+                <div class="card-header bg-info text-white"><strong>Status do Saldo</strong></div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4"><h6 class="text-muted">Peso Previsto (Kg)</h6><p class="h5">{{ ordem_producao.peso_previsto|floatformat:4|default:"0.00" }}</p></div>
+                        <div class="col-4"><h6 class="text-muted">Total Já Transferido (Kg)</h6><p class="h5 text-success">{{ total_transferido|floatformat:4|default:"0.00" }}</p></div>
+                        <div class="col-4"><h6 class="text-muted">Saldo Pendente (Kg)</h6><p class="h5 fw-bold text-danger">{{ saldo_pendente|floatformat:4|default:"0.00" }}</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário de Apontamento -->
+            {% if saldo_pendente > 0 %}
+            <div class="card">
+                <div class="card-header"><strong>Registrar Medição e Transferir Saldo Parcial</strong></div>
+                <div class="card-body">
+                    <form method="post" id="form-apontamento-pastilha" action="{% url 'producao:apontamento_pastilha' op_id=ordem_producao.pk %}">
+                        {% csrf_token %}
+                        {% bootstrap_form_errors form %}
+                        
+                        <div class="row">
+                            <div class="col-sm-4">{% bootstrap_field form.peso_10_botoes %}</div>
+                            <div class="col-sm-4">{% bootstrap_field form.peso addon_after="Kg" help_text="Peso real medido que será transferido." %}</div>
+                            <div class="col-sm-4">{% bootstrap_field form.quantidade_grosas addon_before="≈" field_class="fw-bold bg-light" %}</div>
+                        </div>
+                        
+                        {% bootstrap_field form.observacao %}
+                        
+                        <div class="row">
+                            <div class="col-sm-4">{% bootstrap_field form.responsavel %}</div>
+                            <div class="col-sm-4">{% bootstrap_field form.tipo %}</div>
+                            <div class="col-sm-4">{% bootstrap_field form.proximo_setor %}</div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#retrabalhoModal">
+                                <i class="fas fa-undo me-1"></i> Solicitar Retrabalho
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check me-1"></i> Salvar e Transferir Saldo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-success text-center">
+                <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Trabalho Concluído!</h4>
+                <p>Todo o peso previsto para esta Ordem de Produção já foi medido e transferido.</p>
+            </div>
+            {% endif %}
+
+            <!-- Histórico de Apontamentos -->
+            {% if apontamentos_anteriores %}
+            <div class="card mt-1">
+                <div class="card-header"><strong>Histórico de Medições e Transferências</strong></div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Responsável</th>
+                                    <th>Peso Medido (Kg)</th>
+                                    <th>Grôsas (Calc.)</th>
+                                    <th>Observação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ap in apontamentos_anteriores %}
+                                <tr>
+                                    <td>{{ ap.data_hora_fim|date:"d/m/Y H:i" }}</td>
+                                    <td>{{ ap.responsavel.nome|default:"-" }}</td>
+                                    <td>{{ ap.peso|floatformat:4 }}</td>
+                                    <td>{{ ap.quantidade_grosas|floatformat:2 }}</td>
+                                    <td>{{ ap.observacao|default:"-" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Retrabalho -->
+<div class="modal fade" id="retrabalhoModal" tabindex="-1" aria-labelledby="retrabalhoModalLabel" aria-hidden="true" 
+     data-peso-grosa="{{ ordem_producao.peso_bruto_grosa|default_if_none:''|unlocalize }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="retrabalhoModalLabel">Solicitar Retrabalho para a Química</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{% url 'producao:op-criar-retrabalho-pastilha' op_pk=ordem_producao.pk %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>Informe o motivo e o peso a ser refeito (se parcial).</p>
+                    {% bootstrap_form reprogramacao_form %}
+                    
+                    <div class="mb-3">
+                        <label for="id_grosas_reprogramadas" class="form-label">Grôsas a Reprogramar (Cálculo)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">≈</span>
+                            <input type="text" id="id_grosas_reprogramadas" class="form-control fw-bold bg-light" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning">Confirmar e Enviar para Química</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Lógica para o formulário principal de apontamento
+    const formApontamento = document.getElementById('form-apontamento-pastilha');
+    if (formApontamento) {
+        const pesoInput = formApontamento.querySelector('#id_peso');
+        const saldoPendente = parseFloat("{{ saldo_pendente|unlocalize|default:'0' }}");
+        const limiteSuperior = saldoPendente * 1.05;
+
+        formApontamento.addEventListener('submit', function(event) {
+            const pesoMedidoStr = pesoInput.value.replace(',', '.');
+            const pesoMedido = parseFloat(pesoMedidoStr);
+
+            if (!isNaN(pesoMedido) && pesoMedido > limiteSuperior) {
+                const mensagem = `ATENÇÃO: O peso medido (${pesoMedido.toFixed(4)} Kg) é mais de 5% maior que o saldo pendente (${saldoPendente.toFixed(4)} Kg).\n\nDeseja continuar mesmo assim?`;
+                if (!confirm(mensagem)) {
+                    event.preventDefault();
+                }
+            }
+        });
+
+        const peso10BotoesInput = formApontamento.querySelector('#id_peso_10_botoes');
+        const pesoProducaoInput = formApontamento.querySelector('#id_peso');
+        const quantidadeGrosasInput = formApontamento.querySelector('#id_quantidade_grosas');
+
+        function calcularGrosasPrincipal() {
+            const peso10Botoes = parseFloat(peso10BotoesInput.value.replace(',', '.')) || 0;
+            const pesoProducaoKg = parseFloat(pesoProducaoInput.value.replace(',', '.')) || 0;
+
+            if (peso10Botoes > 0 && pesoProducaoKg > 0) {
+                const pesoProducaoGramas = pesoProducaoKg * 1000;
+                const peso1GrosaG = (peso10Botoes / 10) * 144;
+                if (peso1GrosaG > 0) {
+                    const grosasValue = (pesoProducaoGramas / peso1GrosaG);
+                    quantidadeGrosasInput.value = grosasValue.toFixed(2);
+                } else {
+                    quantidadeGrosasInput.value = '';
+                }
+            } else {
+                quantidadeGrosasInput.value = '';
+            }
+        }
+
+        if (peso10BotoesInput) peso10BotoesInput.addEventListener('input', calcularGrosasPrincipal);
+        if (pesoProducaoInput) pesoProducaoInput.addEventListener('input', calcularGrosasPrincipal);
+    }
+
+    // Lógica para o modal de retrabalho
+    const modal = document.getElementById('retrabalhoModal');
+    if (modal) {
+        // CORREÇÃO: Removido o prefixo 'reprogramacao-' dos seletores para corresponder ao ID padrão do Django.
+        const pesoReprogramadoInput = modal.querySelector('#id_peso_reprogramado');
+        const peso10BotoesModalInput = modal.querySelector('#id_peso_10_botoes');
+        const grosasReprogramadasInput = modal.querySelector('#id_grosas_reprogramadas');
+        
+        function calcularGrosasModal() {
+            const pesoReprogramadoKg = parseFloat(pesoReprogramadoInput.value.replace(',', '.')) || 0;
+            let peso10Botoes = parseFloat(peso10BotoesModalInput.value.replace(',', '.')) || 0;
+            
+            if (peso10BotoesModalInput.hasAttribute('readonly')) {
+                const pesoGrosaGramas = parseFloat(modal.dataset.pesoGrosa) || 0;
+                if (pesoGrosaGramas > 0) {
+                    peso10Botoes = (pesoGrosaGramas / 144) * 10;
+                }
+            }
+
+            let grosasValue = 0;
+            if (pesoReprogramadoKg > 0 && peso10Botoes > 0) {
+                const pesoReprogramadoGramas = pesoReprogramadoKg * 1000;
+                const peso1GrosaG = (peso10Botoes / 10) * 144;
+                if (peso1GrosaG > 0) {
+                    grosasValue = (pesoReprogramadoGramas / peso1GrosaG);
+                }
+            }
+            
+            // CORREÇÃO: Garante que o valor seja um número com ponto decimal para o input.
+            grosasReprogramadasInput.value = grosasValue > 0 ? grosasValue.toFixed(2) : '';
+        }
+
+        if (pesoReprogramadoInput) pesoReprogramadoInput.addEventListener('input', calcularGrosasModal);
+        if (peso10BotoesModalInput) peso10BotoesModalInput.addEventListener('input', calcularGrosasModal);
+    }
+});
+</script>
+{% endblock extra_js %}

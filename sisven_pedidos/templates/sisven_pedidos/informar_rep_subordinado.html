@@ -1,0 +1,113 @@
+{% extends "global/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{{ titulo }}</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Digite o número do pedido para carregar os dados do representante principal e do cliente.
+                        Em seguida, selecione o representante que atuou como subordinado na venda.
+                    </p>
+
+                    <!-- Formulário -->
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <!-- O campo agora não tem mais atributos htmx -->
+                            {{ form.pedido|as_crispy_field }}
+                        </div>
+
+                        <!-- Div onde os detalhes do pedido serão carregados via JavaScript -->
+                        <div id="pedido-details">
+                            <!-- O conteúdo de _pedido_details.html será inserido aqui -->
+                        </div>
+
+                        <!-- Indicador de carregamento (controlado via JS) -->
+                        <div id="loading-spinner" style="display: none;">
+                            <div class="d-flex align-items-center text-secondary mb-3">
+                                <strong role="status">Buscando pedido...</strong>
+                                <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.representante_subordinado|as_crispy_field }}
+                        </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i> Salvar Lançamento
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const pedidoInput = document.getElementById('id_pedido');
+    const detailsContainer = document.getElementById('pedido-details');
+    const spinner = document.getElementById('loading-spinner');
+
+    const searchUrl = "{% url 'sisven_pedidos:buscar_pedido' %}";
+
+    let debounceTimeout;
+
+    pedidoInput.addEventListener('input', function(event) {
+        const pedidoId = event.target.value;
+
+        // Limpa o timeout anterior para criar um novo (debounce)
+        clearTimeout(debounceTimeout);
+
+        // Se o campo estiver vazio, limpa os detalhes e para
+        if (!pedidoId) {
+            detailsContainer.innerHTML = '';
+            return;
+        }
+
+        // Cria um novo timeout de 500ms
+        debounceTimeout = setTimeout(() => {
+            spinner.style.display = 'block'; // Mostra o spinner
+            detailsContainer.innerHTML = ''; // Limpa os detalhes antigos
+
+            fetch(`${searchUrl}?pedido=${pedidoId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na rede ou pedido não encontrado.');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // Insere o HTML retornado pela view no container
+                    detailsContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar pedido:', error);
+                    detailsContainer.innerHTML = "<div class='alert alert-warning'>Não foi possível buscar os dados do pedido.</div>";
+                })
+                .finally(() => {
+                    spinner.style.display = 'none'; // Esconde o spinner
+                });
+        }, 500); // Atraso de 500ms antes de enviar a requisição
+    });
+});
+</script>
+{% endblock %}

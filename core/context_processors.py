@@ -1,8 +1,12 @@
 # core/context_processors.py
 
+from django.contrib.auth.models import Group
+from sisven_core.models import Representante
+
+
 def menu_processor(request):
     """
-    Este processador de contexto define o menu de forma ACUMULATIVA e a 
+    Este processador de contexto define o menu de forma ACUMULATIVA e a
     URL da página inicial com base nos grupos do usuário logado.
     """
     menu_itens = []
@@ -14,7 +18,6 @@ def menu_processor(request):
     grupos_usuario = set(request.user.groups.values_list('name', flat=True))
 
     # --- 1. DEFINE O CONTEXTO PRINCIPAL (HOME URL) ---
-    # Esta seção permanece INTOCADA
     if 'Sisven Admin' in grupos_usuario:
         home_url_name = 'home_admin'
     elif 'Sisven Representantes' in grupos_usuario:
@@ -30,7 +33,6 @@ def menu_processor(request):
             {
                 'id': 'consultasSubmenu', 'label': 'Consultas', 'icon': 'fa-search',
                 'sub_itens': [
-                    # CORREÇÃO CIRÚRGICA 1: Aponta para o namespace do admin
                     {'url_name': 'admin-precos:consulta', 'label': 'Consultar Preços'},
                 ]
             },
@@ -38,7 +40,6 @@ def menu_processor(request):
         menu_itens.extend(menu_consultas)
 
     # --- MENU PARA USUÁRIOS DO SISVEN (ADMINISTRATIVO) ---
-    # Esta seção permanece INTOCADA
     if 'Sisven Admin' in grupos_usuario:
         menu_admin = [
             {
@@ -60,17 +61,38 @@ def menu_processor(request):
 
     # --- MENU PARA REPRESENTANTES DO SISVEN ---
     if 'Sisven Representantes' in grupos_usuario:
+
+        # Cria a lista de sub-itens para o menu de Pedidos
+        pedidos_sub_itens = []
+
+        # Tenta buscar o perfil do representante para verificar seu tipo
+        try:
+            # O username do Django é o mesmo que o login do representante
+            representante = Representante.objects.using('sisven').get(login=request.user.username)
+
+            # --- CONDIÇÃO ADICIONADA AQUI ---
+            # Verifica se o tipo de venda do representante é 'TELEVENDAS'.
+
+            if representante.rep_tipo == 'TELEVENDAS':
+                pedidos_sub_itens.append(
+                    {'url_name': 'sisven_pedidos:comlog_create', 'label': 'Informar Comissão Subordinado'}
+                )
+        except Representante.DoesNotExist:
+            # Se o usuário está no grupo mas não tem um perfil de representante,
+            # o menu de comissão não será exibido.
+            pass
+
         menu_representante = [
             {
                 'id': 'pedidosRepSubmenu', 'label': 'Pedidos', 'icon': 'fa-shopping-cart',
-                'sub_itens': []
+                'sub_itens': pedidos_sub_itens  # Usa a lista criada condicionalmente
             },
             {
                 'id': 'catalogoRepSubmenu', 'label': 'Catálogo', 'icon': 'fa-book-open',
                 'sub_itens': [
-                    # CORREÇÃO CIRÚRGICA 2: Aponta para o namespace de vendas
                     {'url_name': 'vendas-precos:consulta', 'label': 'Consultar Preços de Venda'},
-                    {'url_name': 'vendas-rendimento:consulta_rendimento_vendas', 'label': 'Consultar Quantidade Mínima'},
+                    {'url_name': 'vendas-rendimento:consulta_rendimento_vendas',
+                     'label': 'Consultar Quantidade Mínima'},
                 ]
             },
             {
@@ -79,9 +101,8 @@ def menu_processor(request):
             },
         ]
         menu_itens.extend(menu_representante)
-    
-    """ # --- MENU PARA O CONTROLE DE PRODUÇÃO ---
-    # Esta seção permanece INTOCADA
+
+    # --- MENU PARA O CONTROLE DE PRODUÇÃO ---
     if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
         menu_producao = [
             # ... (conteúdo do menu de produção permanece o mesmo)
@@ -144,6 +165,7 @@ def menu_processor(request):
                     {'url_name': 'producao:lista_ops_quimica', 'label': 'Lista OPs'},
                     {'url_name': 'producao:painel_quimica', 'label': 'Painel Agr. Fórmulas'},
                     {'url_name': 'producao:lancamento-painel-selecao', 'label': 'Painel Lanc. Cil. Ops'},
+                    {'url_name': 'producao:lista_ops_aguardando_corte', 'label': 'Fila Aguardando Corte'},
                 ]
             },
             {
@@ -189,7 +211,7 @@ def menu_processor(request):
                 ]
             },
         ]
-        menu_itens.extend(menu_producao)"""
+        menu_itens.extend(menu_producao)
 
     # Retorna o dicionário completo para o contexto do template
     return {'menu_principal': menu_itens, 'home_url_name': home_url_name}

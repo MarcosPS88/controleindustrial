@@ -1,0 +1,85 @@
+{% extends "global/base.html" %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% load l10n %}
+{% load humanize %}
+
+{% block title %}Produção - {{ setor_nome }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-2">
+
+    <!-- Título da Página (mais compacto) -->
+    <h4 class="mb-3"><i class="fas fa-ruler-combined me-2"></i>Fila de Produção - {{ setor_nome }}</h4>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Abas de Navegação -->
+            <ul class="nav nav-tabs" id="pastilhaTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if active_tab == 'ops_cliente' %}active{% endif %}" id="ops-cliente-tab" href="?tab=ops_cliente" role="tab">
+                        Ordens de Cliente
+                        <span class="badge bg-secondary">{{ ordens_producao_processadas|length }}</span>
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if active_tab == 'kanban' %}active{% endif %}" id="kanban-tab" href="?tab=kanban" role="tab">
+                        Reposição Kanban
+                        <span class="badge bg-secondary">{{ solicitacoes_kanban.count }}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Conteúdo das Abas -->
+            <div class="tab-content pt-3" id="pastilhaTabContent">
+                <!-- Aba de Ordens de Cliente -->
+                <div class="tab-pane fade {% if active_tab == 'ops_cliente' %}show active{% endif %}" id="ops-cliente" role="tabpanel">
+                    
+                    <!-- Formulário de Filtro (Layout ajustado para 3 colunas) -->
+                    <form method="get" class="mb-4 p-3 border rounded bg-light">
+                        <input type="hidden" name="tab" value="ops_cliente">
+                        <div class="row g-3">
+                            <!-- Filtros -->
+                            <div class="col-sm-6 col-md-4">
+                                <label class="form-label fw-bold small">{{ filter_form.numero_pedido.label }}</label>
+                                {{ filter_form.numero_pedido }}
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <label class="form-label fw-bold small">{{ filter_form.numero_op.label }}</label>
+                                {{ filter_form.numero_op }}
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <label class="form-label fw-bold small">{{ filter_form.tamanho.label }}</label>
+                                {{ filter_form.tamanho }}
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <label class="form-label fw-bold small">{{ filter_form.material.label }}</label>
+                                {{ filter_form.material }}
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <label class="form-label fw-bold small">{{ filter_form.cliente.label }}</label>
+                                {{ filter_form.cliente }}
+                            </div>
+                            <div class="col-sm-6 col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    <i class="fas fa-search"></i> Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Tabela de OPs de Cliente -->
+                    {% with ordens_producao=ordens_producao_processadas %}
+                        {% include 'producao/partials/_tabela_ops_pastilha.html' %}
+                    {% endwith %}
+                </div>
+
+                <!-- Aba de Reposição Kanban -->
+                <div class="tab-pane fade {% if active_tab == 'kanban' %}show active{% endif %}" id="kanban" role="tabpanel">
+                    {% include 'producao/partials/_tabela_kanban_pastilha.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

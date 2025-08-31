@@ -1,0 +1,49 @@
+{% extends 'global/base.html' %}
+{% load humanize %}
+{% load l10n %}
+
+{% block title %}Fila de Produção - Contagem Final{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-calculator me-2"></i>Fila de Produção - Contagem Final</h3>
+            <p class="mb-0 text-muted">Filas de trabalho para contagem e embalagem.</p>
+        </div>
+        <div class="card-body">
+            <!-- Abas de Navegação -->
+            <ul class="nav nav-tabs" id="contagemTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if active_tab == 'pequenos' %}active{% endif %}" id="pequenos-tab" href="?tab=pequenos" role="tab">
+                        Lotes Pequenos (Até 80 GRS)
+                        <span class="badge bg-secondary">{{ itens_pequenos_lotes.count }}</span>
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if active_tab == 'grandes' %}active{% endif %}" id="grandes-tab" href="?tab=grandes" role="tab">
+                        Lotes Grandes (Acima de 80 GRS)
+                        <span class="badge bg-secondary">{{ itens_grandes_lotes.count }}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Conteúdo das Abas -->
+            <div class="tab-content" id="contagemTabContent">
+                <!-- Aba Lotes Pequenos -->
+                <div class="tab-pane fade {% if active_tab == 'pequenos' %}show active{% endif %}" id="pequenos" role="tabpanel">
+                    {% with itens_no_setor=itens_pequenos_lotes setor_origem_nome=setor_origem_pequenos %}
+                        {% include 'producao/partials/_tabela_contagem.html' %}
+                    {% endwith %}
+                </div>
+                <!-- Aba Lotes Grandes -->
+                <div class="tab-pane fade {% if active_tab == 'grandes' %}show active{% endif %}" id="grandes" role="tabpanel">
+                    {% with itens_no_setor=itens_grandes_lotes setor_origem_nome=setor_origem_grandes %}
+                        {% include 'producao/partials/_tabela_contagem.html' %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

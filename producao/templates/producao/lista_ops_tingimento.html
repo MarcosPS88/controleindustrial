@@ -1,0 +1,59 @@
+{% extends "global/base.html" %}
+{% load humanize %}
+
+{% block title %}Produção - {{ setor_nome }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-2">
+
+    <h4 class="mb-3"><i class="fas fa-palette me-2"></i>Fila de Produção - {{ setor_nome }}</h4>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Abas de Navegação -->
+            <ul class="nav nav-tabs" id="tingimentoTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if active_tab == 'fila_producao' %}active{% endif %}" id="fila-tab" href="?tab=fila_producao" role="tab">
+                        Fila de Produção
+                        <span class="badge bg-secondary">{{ itens_para_tingir.paginator.count }}</span>
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if active_tab == 'em_andamento' %}active{% endif %}" id="andamento-tab" href="?tab=em_andamento" role="tab">
+                        Lotes em Andamento
+                        <span class="badge bg-warning text-dark">{{ lotes_em_andamento.count }}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Conteúdo das Abas -->
+            <div class="tab-content pt-3" id="tingimentoTabContent">
+                <!-- Aba Fila de Produção -->
+                <div class="tab-pane fade {% if active_tab == 'fila_producao' %}show active{% endif %}" id="fila-producao" role="tabpanel">
+                    
+                    <!-- Formulário de Filtro -->
+                    <form method="get" class="mb-4 p-3 border rounded bg-light">
+                        <input type="hidden" name="tab" value="fila_producao">
+                        <div class="row g-3 align-items-end">
+                            <div class="col-sm-6 col-md-4 col-lg-2"><label class="form-label fw-bold small">{{ filter_form.numero_pedido.label }}</label>{{ filter_form.numero_pedido }}</div>
+                            <div class="col-sm-6 col-md-4 col-lg-2"><label class="form-label fw-bold small">{{ filter_form.numero_op.label }}</label>{{ filter_form.numero_op }}</div>
+                            <div class="col-sm-6 col-md-4 col-lg-2"><label class="form-label fw-bold small">{{ filter_form.tamanho.label }}</label>{{ filter_form.tamanho }}</div>
+                            <div class="col-sm-6 col-md-4 col-lg-2"><label class="form-label fw-bold small">{{ filter_form.cliente.label }}</label>{{ filter_form.cliente }}</div>
+                            <div class="col-sm-12 col-md-4 col-lg-2">
+                                <button type="submit" class="btn btn-primary btn-sm w-100"><i class="fas fa-search"></i> Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    {% include 'producao/partials/_tabela_ops_tingimento.html' %}
+                </div>
+
+                <!-- Aba Lotes em Andamento -->
+                <div class="tab-pane fade {% if active_tab == 'em_andamento' %}show active{% endif %}" id="em-andamento" role="tabpanel">
+                    {% include 'producao/partials/_tabela_lotes_tingimento.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

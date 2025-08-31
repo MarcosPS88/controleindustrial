@@ -13,6 +13,11 @@ CHOICES_STATUS = (
     ('INATIVO', 'Inativo'),
 )
 
+CHOICES_TIPO = (
+    ('TELEVENDAS', 'Televendas'),
+    ('PRESENCIAL', 'Presencial'),
+)
+
 # Atributos comuns para os widgets para evitar repetição
 WIDGET_ATTRS = {'class': 'form-select form-select-sm'}
 
@@ -94,6 +99,7 @@ class UsuarioForm(forms.ModelForm):
     consultar_grupos_clientes = forms.ChoiceField(choices=CHOICES_SIM_NAO, widget=forms.Select(attrs=WIDGET_ATTRS))
     gerenciar_clientes_grupos = forms.ChoiceField(choices=CHOICES_SIM_NAO, widget=forms.Select(attrs=WIDGET_ATTRS))
     alterar_representante_cliente = forms.ChoiceField(choices=CHOICES_SIM_NAO, widget=forms.Select(attrs=WIDGET_ATTRS))
+    rep_tipo = forms.ChoiceField(choices=CHOICES_TIPO, widget=forms.Select(attrs=WIDGET_ATTRS))
 
     def __init__(self, *args, **kwargs):
         super(UsuarioForm, self).__init__(*args, **kwargs)

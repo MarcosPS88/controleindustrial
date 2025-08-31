@@ -42,7 +42,7 @@ urlpatterns = [
     
     path('sisven-admin/', include('sisven_core.urls_admin')),
     path('sisven-vendas/', include('sisven_core.urls_vendas')),
-   # path('controle-ibg/', include('core.urls_controle_ibg')),
+    path('controle-ibg/', include('core.urls_controle_ibg')),
     
 
     # --- ROTAS DAS PÁGINAS INICIAIS (DASHBOARDS) (NOVA SEÇÃO) ---

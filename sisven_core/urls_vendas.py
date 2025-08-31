@@ -9,6 +9,6 @@ urlpatterns = [
     path('home/', HomeVendasView.as_view(), name='home_vendas'),
     path('precos/', include('sisven_consulta_precos.urls', namespace='vendas-precos')),
     path('precos/', include('sisven_consulta_precos.urls', namespace='vendas-rendimento')),
-
+    path('pedidos/', include('sisven_pedidos.urls', namespace='sisven_pedidos')),
    
 ]

@@ -4,8 +4,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from sisven_core.models import ComRepSub, ComCliEsp
 from .forms import ComRepSubForm, ComCliEspForm
+from acedata_core.models import Ter01
+from sisven_core.auth_mixins import SisvenAdminRequiredMixin
+from django.db.models import Q
 
-from sisven_core.auth_mixins import SisvenAdminRequiredMixin 
 
 # --- Views para Configuração de Comissão por Representante ---
 
@@ -74,14 +76,27 @@ class ComCliEspListView(SisvenAdminRequiredMixin, ListView):
     model = ComCliEsp
     template_name = 'sisven_conf_comissoes/com_cli_esp_list.html'
     context_object_name = 'configs'
-    paginate_by = 20
+    #paginate_by = 20
 
     def get_queryset(self):
-        queryset = ComCliEsp.objects.select_related('cliente').order_by('cliente__clinom')
-        search_name = self.request.GET.get('search_name', None)
-        if search_name:
-            queryset = queryset.filter(cliente__clinom__icontains=search_name)
-        return queryset
+        queryset = ComCliEsp.objects.all()
+        search_term = self.request.GET.get('search_name', None)
+
+        if search_term:
+            # CORREÇÃO: A busca agora é feita diretamente na tabela ComCliEsp,
+            # sem acessar o banco de dados externo.
+            query = Q(clinom__icontains=search_term)
+
+            # Tenta buscar pelo código do cliente se o termo for um número
+            try:
+                search_code = int(search_term)
+                query |= Q(clicod=search_code)
+            except (ValueError, TypeError):
+                pass  # Se não for um número, busca apenas pelo nome
+
+            queryset = queryset.filter(query)
+
+        return queryset.order_by('clinom')
 
 class ComCliEspCreateView(SisvenAdminRequiredMixin, CreateView):
     model = ComCliEsp
@@ -89,11 +104,9 @@ class ComCliEspCreateView(SisvenAdminRequiredMixin, CreateView):
     template_name = 'sisven_conf_comissoes/com_form.html'
     success_url = reverse_lazy('sisven_conf_comissoes:com_cli_esp_list')
 
-    def form_valid(self, form):
-        config = form.save(commit=False)
-        config.clinom = config.cliente.clinom
-        config.save()
-        return super().form_valid(form)
+    # CORREÇÃO: O método form_valid foi removido.
+    # O formulário agora cuida de toda a lógica de salvamento.
+    # A CreateView padrão já chama form.save(), que é o comportamento desejado.
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -107,15 +120,14 @@ class ComCliEspUpdateView(SisvenAdminRequiredMixin, UpdateView):
     template_name = 'sisven_conf_comissoes/com_form.html'
     success_url = reverse_lazy('sisven_conf_comissoes:com_cli_esp_list')
 
-    def form_valid(self, form):
-        config = form.save(commit=False)
-        config.clinom = config.cliente.clinom
-        config.save()
-        return super().form_valid(form)
+    # CORREÇÃO: O método form_valid foi removido.
+    # O formulário agora cuida de toda a lógica de salvamento.
+    # A UpdateView padrão já chama form.save(), que é o comportamento desejado.
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['titulo'] = f'Editando Configuração: {self.object.cliente.clinom}'
+        # CORREÇÃO: O título agora usa 'self.object.clinom' diretamente.
+        context['titulo'] = f'Editando Configuração: {self.object.clinom}'
         context['list_url'] = reverse_lazy('sisven_conf_comissoes:com_cli_esp_list')
         return context
 
@@ -124,3 +136,5 @@ class ComCliEspDeleteView(SisvenAdminRequiredMixin, DeleteView):
     template_name = 'sisven_conf_comissoes/com_confirm_delete.html'
     success_url = reverse_lazy('sisven_conf_comissoes:com_cli_esp_list')
     context_object_name = 'config'
+
+

@@ -1,0 +1,28 @@
+{% if pedido %}
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        <strong>Detalhes do Pedido: {{ pedido.pedcod }}</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Cliente:</strong></p>
+                <p>{{ pedido.cliente_info.clicod }} - {{ pedido.cliente_info.clinom }}</p>
+
+            </div>
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Representante Principal:</strong></p>
+                <p>{{ pedido.representante.codigo }} - {{ pedido.representante.nome }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Data do Pedido:</strong></p>
+                <p>{{ pedido.peddat|date:"d/m/Y" }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Valor Total:</strong></p>
+                <p>R$ {{ pedido.pedtotliq|floatformat:2|default:"0,00" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,163 @@
+{% extends 'global/base.html' %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}Expedição - Pedido {{ pedido.numero_pedido }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">
+            <i class="fas fa-shipping-fast me-2"></i>
+            Conferência de Expedição: Pedido <strong>{{ pedido.numero_pedido }}</strong>
+        </h2>
+        <a href="{% url 'producao:fila_expedicao' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Voltar para a Fila
+        </a>
+    </div>
+
+    <!-- DADOS GERAIS DO PEDIDO -->
+    <div class="card mb-4">
+        <div class="card-header"><h5 class="mb-0">Dados do Pedido</h5></div>
+        <div class="card-body">
+            <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
+            <p class="mb-0"><strong>Cidade:</strong> {{ pedido.cidade|default:"-" }}</p>
+        </div>
+    </div>
+
+    <!-- CAIXAS PARA CONFERÊNCIA -->
+    <div class="card">
+        <div class="card-header"><h5 class="mb-0">Caixas para Conferir</h5></div>
+        <div class="card-body">
+            {% if info_caixas %}
+                <div class="list-group">
+                    {% for numero_caixa, dados_caixa in info_caixas.items %}
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">
+                                    <i class="fas fa-box me-2"></i> Caixa #{{ numero_caixa }}
+                                </h5>
+                                <div>
+                                    {% if dados_caixa.conferencia.status == 'FINALIZADA' %}
+                                        <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i> Conferida</span>
+                                    {% elif dados_caixa.conferencia.status == 'EM_CONFERENCIA' %}
+                                        <span class="badge bg-warning text-dark"><i class="fas fa-spinner fa-spin me-1"></i> Em Conferência</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Pendente</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <p class="mb-1">
+                                <strong>Itens na caixa:</strong> {{ dados_caixa.itens|length }} |
+                                <strong>Peso Embalagem:</strong> {{ dados_caixa.peso_caixa|floatformat:3|intcomma }} Kg
+                            </p>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#conferenciaModal-{{ numero_caixa }}">
+                                <i class="fas fa-clipboard-check me-1"></i> Conferir e Pesar
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center text-muted">Nenhuma caixa registrada para este pedido.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Modais de Conferência (um para cada caixa) -->
+{% for numero_caixa, dados_caixa in info_caixas.items %}
+<div class="modal fade" id="conferenciaModal-{{ numero_caixa }}" tabindex="-1" aria-labelledby="modalLabel-{{ numero_caixa }}" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form action="{% url 'producao:salvar_conferencia_caixa' pedido_id=pedido.id numero_caixa=numero_caixa %}" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel-{{ numero_caixa }}">Conferência da Caixa #{{ numero_caixa }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Marque os itens conferidos e informe o peso final da caixa.</p>
+                    
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 5%;" class="text-center">Conf.</th>
+                                    <th>Ped/Item</th>
+                                    <th>Artigo/Tam</th>
+                                    <th>Fur/Acab</th>
+                                    <th>Cor Final</th>
+                                    <th class="text-end">Qtd. Pedido</th>
+                                    <th class="text-end">Qtd. Embalada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ap in dados_caixa.itens %}
+                                <tr>
+                                    <td class="text-center align-middle">
+                                        <input class="form-check-input item-check" type="checkbox" name="itens_conferidos" value="{{ ap.id }}"
+                                               {% if ap.id in dados_caixa.itens_conferidos %}checked{% endif %}>
+                                    </td>
+                                    <td class="align-middle">{{ ap.item_demanda.pedido.numero_pedido }}/{{ ap.item_demanda.item_pedido_erp }}</td>
+                                    <td class="align-middle">{{ ap.item_demanda.ordem_producao.artigo }}/{{ ap.item_demanda.ordem_producao.tamanho }}</td>
+                                    <td class="align-middle text-center">{{ ap.item_demanda.ordem_producao.furacao }}/{{ ap.item_demanda.ordem_producao.acabamento }}</td>
+                                    <td class="align-middle">{{ ap.item_demanda.cor_final }}</td>
+                                    <td class="align-middle text-end">{{ ap.item_demanda.quantidade|floatformat:2 }}</td>
+                                    <td class="align-middle text-end fw-bold">{{ ap.quantidade_embalada|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% crispy form_conferencia %}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="action" value="salvar_progresso" class="btn btn-info">Salvar Progresso</button>
+                    <button type="submit" name="action" value="finalizar" class="btn btn-success btn-finalizar">Conferir e Pesar Caixa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Lógica para cada modal
+    document.querySelectorAll('.modal').forEach(modal => {
+        const form = modal.querySelector('form');
+        const finalizeButton = modal.querySelector('.btn-finalizar');
+        const itemCheckboxes = modal.querySelectorAll('.item-check');
+        const pesoInput = modal.querySelector('[name="peso_conferido"]');
+
+        function checkFinalizeConditions() {
+            const allChecked = Array.from(itemCheckboxes).every(cb => cb.checked);
+            const pesoFilled = pesoInput.value && parseFloat(pesoInput.value.replace(',', '.')) > 0;
+            
+            if (allChecked && pesoFilled) {
+                finalizeButton.disabled = false;
+            } else {
+                finalizeButton.disabled = true;
+            }
+        }
+
+        // Adiciona listeners para verificar as condições em tempo real
+        itemCheckboxes.forEach(checkbox => checkbox.addEventListener('change', checkFinalizeConditions));
+        pesoInput.addEventListener('input', checkFinalizeConditions);
+
+        // Verifica as condições quando o modal é aberto
+        modal.addEventListener('show.bs.modal', function() {
+            checkFinalizeConditions();
+        });
+    });
+});
+</script>
+{% endblock %}

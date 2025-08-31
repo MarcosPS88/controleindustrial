@@ -1,0 +1,62 @@
+{% extends 'global/base.html' %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% load l10n %}
+
+{% block title %}{{ setor_nome }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1 form-apontamento-escolha-pastilhas">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="mb-0"><i class="fas fa-box-open me-2"></i>{{ setor_nome }}</h4>
+                            <small>OP: {{ item.ordem_producao.numero_op }} | Pedido: {{ item.pedido.numero_pedido }}</small>
+                        </div>
+                        <a href="{% url 'producao:lista_ops_contagem' %}" class="btn btn-light btn-sm">
+                            <i class="fas fa-arrow-left me-1"></i> Voltar para a Fila
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="alert alert-secondary py-2">
+                                    <!-- SEÇÃO DE DETALHES DO ITEM ATUALIZADA -->
+                                    <p class="mb-1"><strong>Item:</strong> {{ item.ordem_producao.artigo }} | <strong>Cor:</strong> {{ item.cor_final }} | <strong>Tam:</strong> {{ item.ordem_producao.tamanho }}</p>
+                                    <p class="mb-0"><strong>Furo:</strong> {{ item.ordem_producao.furacao }} | <strong>Acab:</strong> {{ item.ordem_producao.acabamento }} | <strong>Emb:</strong> {{ item.embalagem|default:"-" }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="alert alert-success py-2 text-center">
+                                    <strong>Saldo a Contar:</strong> {{ saldo_disponivel|floatformat:4|intcomma }} Kg
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                    <p class="mb-0">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        {% bootstrap_form form layout='vertical' %}
+                    </div>
+
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-check-circle me-2"></i> Finalizar Contagem
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

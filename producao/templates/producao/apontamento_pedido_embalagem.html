@@ -1,0 +1,162 @@
+{% extends 'global/base.html' %}
+{% load humanize %}
+{% load l10n %}
+{% load crispy_forms_tags %}
+
+{% block title %}Embalagem - Pedido {{ pedido.numero_pedido }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">
+            <i class="fas fa-box-open me-2"></i>
+            Apontamento de Embalagem: Pedido <strong>{{ pedido.numero_pedido }}</strong>
+        </h2>
+        <a href="{% url 'producao:fila_embalagem' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Voltar para a Fila
+        </a>
+    </div>
+
+    <!-- DADOS DO PEDIDO E CLIENTE (NOVO) -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Dados do Pedido</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2"><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
+                    <p class="mb-0"><strong>Cidade:</strong> {{ pedido.cidade|default:"-" }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-2"><strong>Representante:</strong> {{ pedido.representante|default:"-" }}</p>
+                    {# --- CORREÇÃO APLICADA AQUI --- #}
+                    <p class="mb-2"><strong>Data de Emissão:</strong> {{ pedido.data_emissao|date:"d/m/Y" }}</p>
+                    <p class="mb-0"><strong>Data de Entrega:</strong> {{ itens_do_pedido.first.data_entrega|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+        </div>
+        {% if pedido.observacao_detalhada %}
+        <div class="card-footer bg-light">
+            <strong>Observação do Pedido:</strong>
+            <p class="mb-0">{{ pedido.observacao_detalhada|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- ITENS DO PEDIDO -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Itens do Pedido</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>OP</th>
+                            <th>Artigo</th>
+                            <th>Material</th>
+                            <th class="text-center">Tam</th>
+                            <th class="text-center">Fur</th>
+                            <th class="text-center">Acab</th>
+                            <th>Cor Final</th>
+                            <th class="text-end">Qtd. Pedido (GRS)</th>
+                            <th class="text-end">Saldo Disponível (GRS)</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itens_do_pedido %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'producao:detalhes_op' item.ordem_producao.id %}" class="fw-bold" title="Ver detalhes da OP">
+                                    {{ item.ordem_producao.numero_op }}
+                                </a>
+                            </td>
+                            <td>{{ item.ordem_producao.artigo }}</td>
+                            <td>{{ item.ordem_producao.material }}</td>
+                            <td class="text-center">{{ item.ordem_producao.tamanho }}</td>
+                            <td class="text-center">{{ item.ordem_producao.furacao }}</td>
+                            <td class="text-center">{{ item.ordem_producao.acabamento }}</td>
+                            <td>{{ item.cor_final }}</td>
+                            <td class="text-end">{{ item.quantidade|floatformat:2|intcomma }}</td>
+                            <td class="text-end fw-bold {% if item.saldo_embalagem.saldo_grosas > 0 %}text-success{% endif %}">
+                                {{ item.saldo_embalagem.saldo_grosas|default:"0.00"|floatformat:2|intcomma }}
+                            </td>
+                            <td class="text-center">
+                                {% if item.saldo_embalagem.saldo_grosas > 0 %}
+                                    <span class="badge bg-success">Disponível</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Aguardando Contagem</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-primary btn-apontar" 
+                                        data-bs-toggle="modal" data-bs-target="#apontamentoModal"
+                                        data-item-id="{{ item.id }}"
+                                        data-op-num="{{ item.ordem_producao.numero_op }}"
+                                        data-saldo-max="{{ item.saldo_embalagem.saldo_grosas|unlocalize }}"
+                                        {% if not item.saldo_embalagem or item.saldo_embalagem.saldo_grosas <= 0 %}disabled{% endif %}>
+                                    <i class="fas fa-plus me-1"></i> Apontar
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Apontamento -->
+<div class="modal fade" id="apontamentoModal" tabindex="-1" aria-labelledby="apontamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{% url 'producao:salvar_apontamento_embalagem' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="item_demanda_id" id="modal_item_id">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="apontamentoModalLabel">Apontar Embalagem para OP <span id="modal_op_num"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_embalagem|crispy }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Apontamento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const apontamentoModal = document.getElementById('apontamentoModal');
+    apontamentoModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        
+        const itemId = button.getAttribute('data-item-id');
+        const opNum = button.getAttribute('data-op-num');
+        const saldoMax = button.getAttribute('data-saldo-max');
+
+        const modalTitle = apontamentoModal.querySelector('.modal-title #modal_op_num');
+        const modalInputItemId = apontamentoModal.querySelector('#modal_item_id');
+        const modalInputQuantidade = apontamentoModal.querySelector('#id_quantidade_embalada');
+
+        modalTitle.textContent = opNum;
+        modalInputItemId.value = itemId;
+        
+        // Define o valor máximo e o placeholder para o campo de quantidade
+        modalInputQuantidade.setAttribute('max', saldoMax);
+        modalInputQuantidade.setAttribute('placeholder', `Máx: ${saldoMax.replace('.', ',')}`);
+    });
+});
+</script>
+{% endblock %}

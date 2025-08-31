@@ -1,0 +1,54 @@
+{% load humanize %}
+
+<div class="table-responsive mt-3">
+    {% if itens_no_setor %}
+    <table class="table table-sm table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                <th>OP / Pedido</th>
+                <th>Cliente</th>
+                <th>Artigo</th>
+                <th>Tam</th>
+                <th>Fur</th>
+                <th>Acab</th>
+                <th>Cor<br>Final</th>
+                <th>Emb</th> <!-- COLUNA ADICIONADA -->
+                <th>Entrega</th>
+                <th class="text-end">Qtd<br>Pedido<br>(GRS)</th>
+                <th class="text-end">Saldo<br>(Kg)</th>
+                <th class="text-end">Saldo<br>(GRS)</th>
+                <th class="text-center">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in itens_no_setor %}
+            <tr>
+                <td class="align-middle">
+                    <a href="{% url 'producao:detalhes_op' item.ordem_producao.id %}">{{ item.ordem_producao.numero_op }}</a> / {{ item.pedido.numero_pedido }}
+                </td>
+                <td class="align-middle">{{ item.pedido.cliente.nome }}</td>
+                <td class="align-middle">{{ item.ordem_producao.artigo }}</td>
+                <td class="align-middle">{{ item.ordem_producao.tamanho }}</td>
+                <td class="align-middle">{{ item.ordem_producao.furacao }}</td>
+                <td class="align-middle">{{ item.ordem_producao.acabamento }}</td>
+                <td class="align-middle">{{ item.cor_final }}</td>
+                <td class="align-middle">{{ item.embalagem|default:"-" }}</td> <!-- DADO ADICIONADO -->
+                <td class="align-middle">{{ item.data_entrega|date:"d/m/Y" }}</td>
+                <td class="text-end align-middle">{{ item.quantidade|floatformat:2|intcomma }}</td>
+                <td class="text-end fw-bold text-success align-middle">{{ item.saldo_no_setor|floatformat:3|intcomma }}</td>
+                <td class="text-end fw-bold text-info align-middle">{{ item.saldo_grosas_calculado|floatformat:2|intcomma }}</td>
+                <td class="text-center">
+                    <a href="{% url 'producao:apontamento_contagem' item_id=item.id setor_origem=setor_origem_nome %}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i> Contar
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-secondary text-center">
+        Nenhum item nesta fila.
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,104 @@
+{% extends "global/base.html" %}
+{% load django_bootstrap5 %}
+{% load l10n %}
+
+{% block title %}{{ setor_nome }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-boxes"></i> {{ setor_nome }}</h4>
+            <div>
+                <!-- Botão para futura ação de solicitar reposição -->
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#solicitarReposicaoModal">
+                    <i class="fas fa-plus-circle me-1"></i> Solicitar Reposição
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            {% bootstrap_messages %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-sm">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Material</th>
+                            <th scope="col">Cor</th>
+                            <th scope="col">Tamanho</th>
+                            <th scope="col" class="text-end">Saldo em Peso (Kg)</th>
+                            <th scope="col" class="text-end">Saldo em Grôsas (Aprox.)</th>
+                            <th scope="col">Última Atualização</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itens_estoque %}
+                        <tr>
+                            <td><strong>{{ item.material }}</strong></td>
+                            <td>{{ item.cor }}</td>
+                            <td>{{ item.tamanho }}</td>
+                            <td class="text-end fw-bold {% if item.saldo_kg > 0 %}text-success{% else %}text-danger{% endif %}">
+                                {{ item.saldo_kg|floatformat:4 }}
+                            </td>
+                            <td class="text-end fw-bold {% if item.saldo_grosas > 0 %}text-success{% else %}text-danger{% endif %}">
+                                {{ item.saldo_grosas|floatformat:2 }}
+                            </td>
+                            <td>
+                                {% if item.ultima_atualizacao %}
+                                    {{ item.ultima_atualizacao|date:"d/m/Y H:i" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <!-- Botão para ver o histórico de movimentações (futuro) -->
+                                <a href="#" class="btn btn-outline-primary btn-sm" title="Ver Histórico">
+                                    <i class="fas fa-history"></i>
+                                </a>
+                                <!-- Botão para ajuste de inventário (futuro) -->
+                                <a href="#" class="btn btn-outline-secondary btn-sm" title="Ajustar Estoque">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                Nenhum item de estoque Kanban cadastrado.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Solicitação de Reposição -->
+<div class="modal fade" id="solicitarReposicaoModal" tabindex="-1" aria-labelledby="solicitarReposicaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- --- ATUALIZAÇÃO: O formulário agora aponta para a nova URL --- -->
+            <form action="{% url 'producao:kanban_criar_solicitacao' %}" method="post" novalidate>
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="solicitarReposicaoModalLabel">Solicitar Reposição de Estoque Kanban</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- --- ATUALIZAÇÃO: Renderiza o formulário passado pelo contexto --- -->
+                    {% bootstrap_form solicitacao_form %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <!-- --- ATUALIZAÇÃO: O botão principal agora é do tipo submit --- -->
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane me-1"></i> Enviar Solicitação
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends "global/base.html" %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-edit"></i> {{ page_title }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <strong>Dados Editáveis da OP</strong>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                <div class="d-flex justify-content-between mt-4">
+                                    <a href="{{ view.get_success_url }}" class="btn btn-secondary">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Salvar Alterações
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <strong>Itens de Demanda Vinculados a esta OP</strong>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped table-hover mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Pedido</th>
+                                            <th>Cliente</th>
+                                            <th>Item</th>
+                                            <th>Cor Final</th>
+                                            <th>Emb.</th>
+                                            <th>Entrega</th>
+                                            <th class="text-end">Qtd (GRS)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in itens_demanda %}
+                                        <tr>
+                                            <td>{{ item.pedido.numero_pedido }}</td>
+                                            <td>{{ item.pedido.cliente.nome|truncatechars:25 }}</td>
+                                            <td>{{ item.item_pedido_erp }}</td>
+                                            <td>{{ item.cor_final }}</td>
+                                            <td>{{ item.embalagem|default:"-" }}</td>
+                                            <td>{{ item.data_entrega|date:"d/m/y"|default:"-" }}</td>
+                                            <td class="text-end fw-bold">{{ item.quantidade|floatformat:2|intcomma }}</td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="7" class="text-center">Nenhum item de demanda encontrado.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

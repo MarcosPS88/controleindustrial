@@ -1,0 +1,99 @@
+{% load l10n %}
+<form method="POST" action="{% url 'producao:lancamento-apontamento-agrupado' agrupamento_pk=agrupamento.pk %}" class="apontamento-form needs-validation" id="form-{{ form_id_suffix }}" novalidate>
+    {% csrf_token %}
+    <!-- Hidden input to identify which lancamento is being edited, or if it's new -->
+    <input type="hidden" name="lancamento_pk" value="{{ lancamento.pk|default:'new' }}">
+
+    <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="btn btn-sm btn-outline-warning cancel-apontamento-btn">
+            <i class="fas fa-times me-1"></i> Cancelar Apontamento
+        </button>
+    </div>
+
+    <div class="row g-2 mb-3 p-2 border rounded">
+        <div class="col-md-3">
+            <label class="form-label">Operador</label>
+            <select name="operador" class="form-select form-select-sm" required>
+                {% for op_user in operadores %}
+                    <option value="{{ op_user.pk }}" {% if lancamento.operador.pk == op_user.pk %}selected{% endif %}>{{ op_user.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Cilindro</label>
+            <select name="maquina" class="form-select form-select-sm" required>
+                {% for maq in maquinas %}
+                    <option value="{{ maq.pk }}" {% if lancamento.maquina.pk == maq.pk %}selected{% endif %}>{{ maq.nome_maq_erp }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Início</label>
+            <input type="datetime-local" name="data_hora_inicio" class="form-control form-control-sm" value="{{ lancamento.data_hora_inicio|date:'Y-m-d\TH:i' }}" required>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Fim</label>
+            <input type="datetime-local" name="data_hora_fim" class="form-control form-control-sm" value="{{ lancamento.data_hora_fim|date:'Y-m-d\TH:i' }}" required>
+        </div>
+        <div class="col-12">
+            <label class="form-label">Observações</label>
+            <textarea name="observacoes" class="form-control form-control-sm" rows="1">{{ lancamento.observacoes|default:'' }}</textarea>
+        </div>
+    </div>
+
+    <h6>Contribuição de Placas</h6>
+    <div class="contribution-container mb-3">
+        {% for op in ordens_do_agrupamento %}
+            {% with contrib as lancamento.contribuicoes.all|get_item:op.pk %}
+            <div class="row g-2 align-items-end p-2 mb-1 border rounded">
+                <div class="col-md-4"><strong>OP: {{ op.numero_op }} (Tam: {{ op.tamanho }})</strong></div>
+                <div class="col-md-4">
+                    <label class="form-label">Qtd. Placas</label>
+                    <input type="number" step="0.0001" name="placas_op_{{ op.pk }}" class="form-control form-control-sm contribution-placas" data-rendimento="{{ op.rendimento|unlocalize|default_if_none:'0' }}" value="{{ contrib.quantidade_placas|unlocalize|default:'0.0000' }}" placeholder="0.0000">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Qtd. Grosas (Calc.)</label>
+                    <input type="text" class="form-control-plaintext ps-2 contribution-grosas" readonly value="0.0000">
+                </div>
+            </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+
+    <div class="row g-2 mb-3 text-center p-2 bg-light rounded">
+        <div class="col-6"><h6>Total Placas</h6><p class="h5 total-placas">0.0000</p></div>
+        <div class="col-6"><h6>Total Grosas</h6><p class="h5 text-success total-grosas">0.0000</p></div>
+    </div>
+    
+    <input type="hidden" name="quantidade_placas_total" value="0">
+    <input type="hidden" name="quantidade_grosas_total" value="0">
+
+    <h6 class="mt-3">Registro de Paradas</h6>
+    <div class="paradas-container mb-2">
+        <!-- Paradas existentes seriam carregadas aqui -->
+    </div>
+    <button type="button" class="btn btn-secondary btn-sm add-parada-btn"><i class="fas fa-plus me-1"></i>Adicionar Parada</button>
+    
+    <hr class="my-4">
+    <div class="d-flex justify-content-end gap-2">
+        <a href="{% url 'producao:lancamento-painel-selecao' %}" class="btn btn-light">Voltar</a>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Salvar Apontamento</button>
+    </div>
+</form>
+
+{% comment %} 
+Para o 'with contrib' funcionar, você precisará de um custom template tag para pegar um item de um queryset por chave,
+já que o Django não permite acesso a dicionário com chave dinâmica no template.
+
+Exemplo de custom template tag (em producao/templatetags/get_item.py):
+from django import template
+register = template.Library()
+
+@register.filter
+def get_item(queryset, key):
+    try:
+        # Assumindo que a contribuição pode ser encontrada pela fk da ordem_producao
+        return queryset.get(ordem_producao__pk=key)
+    except:
+        return None
+{% endcomment %}

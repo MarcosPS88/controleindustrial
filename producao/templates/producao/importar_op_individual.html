@@ -1,0 +1,31 @@
+{% extends "global/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}Importar OP Individualmente{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-file-import"></i> Importar Ordem de Produção Individual</h3>
+            <p>Use esta tela para importar OPs específicas que não possuem um pedido de venda vinculado no ERP.</p>
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Importar OP
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-muted">
+            <small>
+                <strong>Atenção:</strong> Esta funcionalidade deve ser usada apenas para casos especiais. A importação em massa continua sendo o método principal.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
