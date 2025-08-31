@@ -103,7 +103,7 @@ def menu_processor(request):
         menu_itens.extend(menu_representante)
 
     # --- MENU PARA O CONTROLE DE PRODUÇÃO ---
-    if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
+    """if 'Producao' in grupos_usuario or 'PCP' in grupos_usuario:
         menu_producao = [
             # ... (conteúdo do menu de produção permanece o mesmo)
             {
@@ -211,7 +211,7 @@ def menu_processor(request):
                 ]
             },
         ]
-        menu_itens.extend(menu_producao)
+        menu_itens.extend(menu_producao)"""
 
     # Retorna o dicionário completo para o contexto do template
     return {'menu_principal': menu_itens, 'home_url_name': home_url_name}
